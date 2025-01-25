@@ -9,9 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "gsap": "^3.12.7",
+    "next": "15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "next": "15.1.6"
+    "remixicon": "^4.6.0"
   },
   "devDependencies": {
     "postcss": "^8",
