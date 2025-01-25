@@ -39,6 +39,18 @@ body {
   transform: translateY(110%);
   opacity: 0;
 }
+#back-btn{
+  position: absolute;
+  color: #e4d5ba;
+  top: 2vw;
+  left: calc(1vw + 15px);
+  cursor: pointer;
+  z-index: 99;
+  font-size: 16px;
+  opacity: 0;
+  display: none;
+}
+
 .corner{
   opacity: 0;
 }
@@ -86,9 +98,11 @@ body {
   margin: 0 auto;
 }
 .banner-btn-bottom{
-  background-color: #fff !important;
+  background-color: #222222 !important;
   margin-top: 2vw !important;
-
+}
+.banner-btn-bottom:hover h6{
+  color: #e4d5ba !important;
 }
 #banner-btn-cir {
   position: relative;
@@ -96,7 +110,7 @@ body {
   width: 20px;
   height: 20px;
   border-radius: 50px;
-  background-color: white;
+  background-color: #e4d5ba;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -180,16 +194,16 @@ body {
   width: 16px;
   height: 16px;
   border-radius: 50px;
-  border: 1px solid white;
+  border: 1px solid #e4d5ba;
   display: inline-block;
-  color: white;
+  color: #e4d5ba;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 8px;
 }
 #info-icon:hover {
-  background-color: white;
+  background-color: #e4d5ba;
   color: #333333;
 }
 #info-container p {

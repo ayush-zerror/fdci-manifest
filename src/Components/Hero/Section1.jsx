@@ -7,11 +7,22 @@ const Section1 = () => {
   const [disabledEmail, setDisabledEmail] = useState(true)
   const [disabledcontact, setDisabledcontact] = useState(true)
   const [disabledCity, setDisabledCity] = useState(true)
+  const [disabledOccupation, setDisabledOccupation] = useState(false)
+  const [disabledInstagram, setDisabledInstagram] = useState(true)
+  const [disabledDetails, setDisabledDetails] = useState(true)
+  const [disabledInterest, setDisabledInterest] = useState(true)
   const [formData, setFormData] = useState({
     name: '',
     contact: '',
     email: '',
     city: '',
+    occupation: "",
+    instagram: "",
+    weddingDetails: {
+      date: "",
+      venue: "",
+    },
+    interestedIn: "",
   })
   const handleName = (e) => {
     e.preventDefault()
@@ -61,38 +72,89 @@ const Section1 = () => {
     if (formData.city.trim().length > 0) {
       setDisabledCity(true)
       document.querySelector(".city-btn").classList.remove("btn-hover")
-
       document.querySelector(".step-count").textContent = "3"
+      document.querySelector("#back-slide").setAttribute("data-slide", "3")
       var tl = gsap.timeline()
-      .to(".form-container", {
-        opacity: 0,
-        duration: .5,
-        onComplete:()=>{
-          document.querySelector(".form-container").style.display = "none"
-        }
-      })
-      .to(".forms-pt2", {
-        onStart: () => {
-          document.querySelector(".form-container2").style.display = "flex"
-        },
-        opacity: 1,
-        transform: "translateY(0%)",
-        stagger: {
-          amount: .4,
-        },
-        duration: 1,
-        delay: .3
-      })
-      // .to(".forms-light2", {
-      //   opacity: .3,
-      //   duration: .5,
-      // })
+        .to(".form-container", {
+          opacity: 0,
+          duration: .5,
+          onComplete: () => {
+            document.querySelector(".form-container").style.display = "none"
+          }
+        })
+        .to(".forms-pt2", {
+          onStart: () => {
+            document.querySelector(".form-container2").style.display = "flex"
+          },
+          opacity: 1,
+          transform: "translateY(0%)",
+          stagger: {
+            amount: .4,
+          },
+          duration: 1,
+          delay: .3
+        })
+        .to(".forms-light2", {
+          opacity: .3,
+          duration: .5,
+        })
 
     }
   }
+  const handleOccupation = (e) => {
+    e.preventDefault()
+    if (formData.occupation.trim().length > 0) {
+      setDisabledOccupation(true)
+      document.querySelector(".occupation-btn").classList.remove("btn-hover")
+      gsap.to(".forms-pt21", {
+        opacity: 1,
+        duration: .5,
+        onComplete: () => {
+          setDisabledInstagram(false)
+        }
+      })
+    }
+  }
+  const handleInstagram = (e) => {
+    e.preventDefault()
+    if (formData.instagram.trim().length > 0) {
+      setDisabledInstagram(true)
+      document.querySelector(".instagram-btn").classList.remove("btn-hover")
+      gsap.to(".forms-pt22", {
+        opacity: 1,
+        duration: 1,
+        onComplete: () => {
+          setDisabledDetails(false)
+        }
+      })
+    }
+  }
+  const handleDetail = (e) => {
+    e.preventDefault()
+    // if (formData.weddingDetails.date.trim().length > 0 && formData.weddingDetails.venue.trim().length > 0) {
+    setDisabledDetails(true)
+    document.querySelectorAll(".details-btn").forEach((b) => b.classList.remove("btn-hover"))
+    gsap.to(".forms-pt23", {
+      opacity: 1,
+      duration: 1,
+      onComplete: () => {
+        setDisabledInterest(false)
+      }
+    })
+    // }
+  }
+  const handleInterest = (e) => {
+    e.preventDefault()
+    // if (formData.interestedIn.trim().length > 0) {
+      document.querySelectorAll(".interest-btn").forEach((b)=>{
+        b.classList.remove("btn-hover")
+      })
+      setDisabledInterest(true)
+    // }
+  }
 
   const handleInfoHover = (e) => {
-    document.querySelector("#info-container").style.color = "#fff";
+    document.querySelector("#info-container").style.color = "#e4d5ba";
     document.querySelector("#info-container").style.backgroundColor = "#393939";
   }
   const handleInfoLeave = (e) => {
@@ -110,7 +172,10 @@ const Section1 = () => {
       }, "a")
       .to(".corner", {
         opacity: 0,
-        duration: .5
+        duration: .5,
+        onStart: () => {
+          document.querySelector("#back-btn").style.display = "block"
+        }
       }, "a")
       .to(".banner-card", {
         onStart: function () {
@@ -119,14 +184,105 @@ const Section1 = () => {
         opacity: 1,
         transform: "translateY(0%)",
         stagger: {
-          amount: .3,
+          amount: .25,
         },
-        duration: 1.5,
+        duration: .8,
       })
-      .to(".card-content,#que1", {
+      .to(".card-content,#que1,#back-btn", {
         opacity: 1,
-        duration: 1
+        duration: 1,
       })
+  }
+  const handleBack = (e) => {
+    if (e.target.dataset.slide == 1) {
+
+      var tl = gsap.timeline()
+      tl
+        .to(".card-content,#que1", {
+          opacity: 0,
+          duration: .5,
+          onComplete: () => {
+            document.querySelector("#back-btn").style.display = "none"
+          }
+        })
+        .to(".banner-card", {
+          opacity: 0,
+          transform: "translateY(150%)",
+          stagger: {
+            amount: -.1,
+          },
+          duration: .8,
+          onComplete: function () {
+            gsap.set("#banner-card-container", { display: "none" })
+          },
+        })
+        .to("#banner-content", {
+          y: 0,
+          opacity: 1,
+          duration: .5
+        }, "a")
+        .to(".corner", {
+          opacity: 1,
+          duration: .5
+        }, "a")
+        .to("#back-btn", {
+          opacity: 1,
+          duration: 1
+        })
+    }
+    if (e.target.dataset.slide == 2) {
+      document.querySelector(".step-count").textContent = "1"
+      document.querySelector("#back-slide").setAttribute("data-slide", "1")
+      var tl = gsap.timeline()
+      tl
+        .to(".input-box,#question2,#subtitle", {
+          opacity: 0,
+          duration: .5
+        })
+        .to(".forms", {
+          opacity: 0,
+          transform: "translateY(500%)",
+          stagger: {
+            amount: -.4,
+          },
+          duration: 1,
+          onComplete: () => {
+            document.querySelector(".form-container").style.display = "none"
+          },
+        })
+        .to("#question1", {
+          opacity: 1,
+          duration: .5,
+          onComplete: () => {
+            document.querySelector("#subtitle").style.display = "block"
+          }
+        }, "a")
+        .to("#cards", {
+          opacity: 1,
+          duration: .5
+        }, "a")
+    }
+    if (e.target.dataset.slide == 3) {
+      document.querySelector(".step-count").textContent = "2"
+      document.querySelector("#back-slide").setAttribute("data-slide", "2")
+      var tl = gsap.timeline()
+        .to(".forms-pt2", {
+          opacity: 0,
+          transform: "translateY(500%)",
+          stagger: {
+            amount: -.4,
+          },
+          duration: 1,
+          onComplete: () => {
+            document.querySelector(".form-container2").style.display = "none"
+            document.querySelector(".form-container").style.display = "flex"
+          },
+        })
+        .to(".form-container", {
+          opacity: 1,
+          duration: .5,
+        })
+    }
   }
 
   useEffect(() => {
@@ -144,6 +300,7 @@ const Section1 = () => {
       })
       card.addEventListener("click", function () {
         document.querySelector(".step-count").textContent = "2"
+        document.querySelector("#back-slide").setAttribute("data-slide", "2")
         var tl = gsap.timeline()
         tl
           .to("#cards", {
@@ -182,37 +339,34 @@ const Section1 = () => {
 
   }, [])
 
-  useEffect(()=>{
+  useEffect(() => {
     var tl2 = gsap.timeline()
     tl2
-    .to(".hero-banner",{
-      transform:"translateY(0%)",
-      opacity:1,
-      duration:2,
-      delay:.5
-    })
-    .to(".home-section1",{
-      padding:"1vw",
-      duration:1,
-      ease:"power3.out",
-      delay:.2
-    },"s")
-    .to(".hero-banner",{
-      borderRadius:"20px",
-      opacity:1,
-      duration:2,
-      delay:.5
-    },"s")
-    .to(".corner,#banner-content,#info-container",{
-      opacity:1,
-      duration:2,
-      delay:.7
-    },"s")
-  },[])
+      .to(".hero-banner", {
+        transform: "translateY(0%)",
+        opacity: 1,
+        duration: .8,
+        delay: .2
+      })
+      .to(".home-section1", {
+        padding: "1vw",
+        duration: .5,
+      },"s")
+      .to(".hero-banner", {
+        borderRadius: "20px",
+        opacity: 1,
+        duration: .5,
+      }, "s")
+      .to(".corner,#banner-content,#info-container", {
+        opacity: 1,
+        duration: .5
+      })
+  }, [])
 
   return (
     <div className='home-section1'>
       <div className="hero-banner">
+        <span id='back-btn' onClick={(e) => handleBack(e)}><i data-slide="1" id='back-slide' className="ri-arrow-left-line"></i></span>
         <div id='banner-content'>
           <img src="/images/fdci.png" alt="" />
           <p>Is back with another edition
@@ -323,59 +477,59 @@ const Section1 = () => {
               </form>
             </div>
             <div className='form-container2'>
-              <form action="" autoComplete='off' className='forms-pt2'>
+              <form action="" autoComplete='off' onSubmit={handleOccupation} className='forms-pt2'>
                 <div className='input-container'>
                   <div className='input-box2'>
                     <p>Please enter your occupation.</p>
                     <div className='input-wrapper'>
-                      <input type="text" name='name' placeholder='Enter your occupation' />
-                      <button className='done-btn btn-hover'>
+                      <input type="text" name='occupation' required disabled={disabledOccupation} onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} value={formData.occupation} placeholder='Enter your occupation' />
+                      <button className='done-btn occupation-btn btn-hover' disabled={disabledOccupation}>
                         <p>done</p>
                       </button>
                     </div>
                   </div>
                 </div>
               </form>
-              <form action="" autoComplete='off' className='forms-pt2 forms-light2 forms-pt21'>
+              <form action="" autoComplete='off' onSubmit={handleInstagram} className='forms-pt2 forms-light2 forms-pt21'>
                 <div className='input-container'>
                   <div className='input-box2'>
                     <p>What’s your Instagram handle?</p>
                     <div className='input-wrapper'>
-                      <input type="text" name='name' placeholder='Enter your Instagram handle' />
-                      <button className='done-btn btn-hover'>
+                      <input type="text" name='instagram' required disabled={disabledInstagram} onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} value={formData.instagram} placeholder='Enter your Instagram handle' />
+                      <button className='done-btn instagram-btn btn-hover' disabled={disabledInstagram}>
                         <p>done</p>
                       </button>
                     </div>
                   </div>
                 </div>
               </form>
-              <form action="" autoComplete='off' className='forms-pt2 forms-light2 forms-pt22'>
+              <form action="" autoComplete='off' onSubmit={handleDetail} className='forms-pt2 forms-light2 forms-pt22'>
                 <div className='input-container'>
                   <div className='input-box2'>
                     <p>Are you or someone you know getting married?</p>
                     <div className='input-wrapper'>
-                      <button className='done-btn btn-hover option-btn'>
+                      <button className='done-btn details-btn btn-hover option-btn' disabled={disabledDetails}>
                         <p>If yes, please share the details!</p>
                       </button>
-                      <button className='done-btn btn-hover option-btn'>
+                      <button className='done-btn details-btn btn-hover option-btn' disabled={disabledDetails}>
                         <p>No</p>
                       </button>
                     </div>
                   </div>
                 </div>
               </form>
-              <form action="" autoComplete='off' className='forms-pt2 forms-light2 forms-pt23'>
+              <form action="" autoComplete='off' onSubmit={handleInterest} className='forms-pt2 forms-light2 forms-pt23'>
                 <div className='input-container'>
                   <div className='input-box2'>
                     <p>What excites you the most when it comes to weddings?</p>
                     <div className='input-wrapper'>
-                      <button className='done-btn btn-hover option-btn'>
+                      <button className='done-btn interest-btn btn-hover option-btn' disabled={disabledInterest}>
                         <p>Wedding Wear Designers</p>
                       </button>
-                      <button className='done-btn btn-hover option-btn'>
+                      <button className='done-btn interest-btn btn-hover option-btn' disabled={disabledInterest}>
                         <p>Fine Jewellery</p>
                       </button>
-                      <button className='done-btn btn-hover option-btn'>
+                      <button className='done-btn interest-btn btn-hover option-btn' disabled={disabledInterest}>
                         <p>Trousseau & Wedding Services</p>
                       </button>
                     </div>
