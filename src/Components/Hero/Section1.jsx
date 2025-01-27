@@ -170,11 +170,14 @@ const Section1 = () => {
         opacity: 0,
         duration: .5
       }, "a")
-      .to(".corner", {
+      .to(".corner ,#banner-btm", {
         opacity: 0,
         duration: .5,
         onStart: () => {
           document.querySelector("#back-btn").style.display = "block"
+        },
+        onComplete: () => {
+          document.querySelector("#banner-btm").style.display = "none"
         }
       }, "a")
       .to(".banner-card", {
@@ -237,7 +240,10 @@ const Section1 = () => {
       tl
         .to(".input-box,#question2,#subtitle", {
           opacity: 0,
-          duration: .5
+          duration: .5,
+          onComplete:()=>{
+            document.querySelector("#subtitle").style.display = "none"
+          }
         })
         .to(".forms", {
           opacity: 0,
@@ -253,9 +259,6 @@ const Section1 = () => {
         .to("#question1", {
           opacity: 1,
           duration: .5,
-          onComplete: () => {
-            document.querySelector("#subtitle").style.display = "block"
-          }
         }, "a")
         .to("#cards", {
           opacity: 1,
@@ -522,7 +525,7 @@ const Section1 = () => {
                 <div className='input-container'>
                   <div className='input-box2'>
                     <p>What excites you the most when it comes to weddings?</p>
-                    <div className='input-wrapper'>
+                    <div className='input-wrapper btn-wrap-mobile'>
                       <button className='done-btn interest-btn btn-hover option-btn' disabled={disabledInterest}>
                         <p>Wedding Wear Designers</p>
                       </button>
