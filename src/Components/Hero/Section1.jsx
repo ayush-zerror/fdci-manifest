@@ -282,6 +282,27 @@ const Section1 = () => {
     if (e.target.dataset.slide == 2) {
       document.querySelector(".step-count").textContent = "1"
       document.querySelector("#back-slide").setAttribute("data-slide", "1")
+      setDisabledName(false)
+      setDisabledEmail(true)
+      setDisabledcontact(true)
+      setDisabledOccupation(true)
+      setDisabledInstagram(true)
+      setDisabledCity(true)
+      setFormData({
+        category: '',
+        name: '',
+        contact: '',
+        email: '',
+        city: '',
+        occupation: "",
+        instagram: "",
+        weddingDetails: {
+          date: "",
+          venue: "",
+        },
+        interestedIn: "",
+        brand: "",
+      })
       var tl = gsap.timeline()
       tl
         .to(".input-box,#question2,#subtitle", {
@@ -314,6 +335,8 @@ const Section1 = () => {
     if (e.target.dataset.slide == 3) {
       document.querySelector(".step-count").textContent = "2"
       document.querySelector("#back-slide").setAttribute("data-slide", "2")
+      setDisabledCity(false)
+      setFormData({ ...formData, city: "" })
       var tl = gsap.timeline()
         .to(".forms-pt2", {
           opacity: 0,
