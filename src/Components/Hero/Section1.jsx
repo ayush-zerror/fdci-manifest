@@ -192,7 +192,8 @@ const Section1 = () => {
     })
     // }
   }
-  const handleAnswer = () => {
+  const handleAnswer = (e) => {
+    e.preventDefault()
     gsap.to(".wedding-answer", {
       opacity: 0,
       duration: .3,
@@ -271,7 +272,7 @@ const Section1 = () => {
           clearInterval(interval);
           setTimeout(() => {
             window.location.reload()
-          }, 2900);
+          }, 2800);
         }
       }, 1000);
 
@@ -740,9 +741,9 @@ const Section1 = () => {
                     <p>Are you or someone you know getting married?</p>
                     <div className='input-wrapper data-picker-wrapper'>
                       <div className='wedding-answer'>
-                        <div onClick={handleAnswer} className='done-btn details-btn btn-hover option-btn' disabled={disabledDetails}>
+                        <button onClick={(e)=>handleAnswer(e)} className='done-btn details-btn btn-hover option-btn' disabled={disabledDetails}>
                           <p>If yes, please share the details!</p>
-                        </div>
+                        </button>
                         <button className='done-btn details-btn btn-hover option-btn' disabled={disabledDetails}>
                           <p>No</p>
                         </button>
