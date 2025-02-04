@@ -24,8 +24,8 @@ const Section1 = () => {
       date: "",
       venue: "",
     },
-    interestedIn: "",
-    brand: "",
+    interestedIn: [],
+    brand: [],
   })
 
 
@@ -207,62 +207,54 @@ const Section1 = () => {
   }
   const handleInterest = (e) => {
     e.preventDefault()
-    // if (formData.interestedIn.trim().length > 0) {
-    document.querySelectorAll(".interest-btn").forEach((b) => {
-      b.classList.remove("btn-hover")
-    })
-    setDisabledInterest(true)
-    gsap.to(".forms-pt23", {
-      opacity: 1,
-      duration: 1,
-      onComplete: () => {
-        setDisabledBrand(false)
-      }
-    })
-    // }
+    if (formData.interestedIn.length > 0) {
+      document.querySelectorAll(".interest-btn").forEach((b) => {
+        b.classList.remove("btn-hover")
+      })
+      setDisabledInterest(true)
+      gsap.to(".forms-pt23", {
+        opacity: 1,
+        duration: 1,
+        onComplete: () => {
+          setDisabledBrand(false)
+        }
+      })
+    }
   }
   const handleInterestSelection = (interestedIn, e) => {
-    setFormData({ ...formData, interestedIn })
+    e.preventDefault()
+    setFormData({ ...formData, interestedIn: [...formData.interestedIn, interestedIn] })
     e.target.querySelector(".checkbox").style.display = "block"
   }
   const handleBrand = (e) => {
     e.preventDefault()
-    // if (formData.interestedIn.trim().length > 0) {
-    document.querySelectorAll(".brand-btn").forEach((b) => {
-      b.classList.remove("btn-hover")
-    })
-    setDisabledBrand(true)
-    // }
-  }
-  const handleBrandSelection = (brand, e) => {
-    setFormData({ ...formData, brand })
-    e.target.querySelector(".checkbox").style.display = "block"
-
-    setDisabledBrand(true)
-    document.querySelector(".step-count").textContent = "1"
-    document.querySelector("#back-slide").setAttribute("data-slide", "1")
-    var tl = gsap.timeline()
-      .to(".form-container2", {
-        opacity: 0,
-        duration: .5,
-        onComplete: () => {
-          document.querySelector(".form-container2").style.display = "none"
-        }
-      }, "a")
-      .to("#que1,#subtitle,#back-btn", {
-        opacity: 0,
-        duration: .5,
-      }, "a")
-      .to(".forms-pt2", {
-        onStart: () => {
-          document.querySelector(".submit-slide").style.display = "flex"
-        },
-        opacity: 1,
-        duration: 1,
-        delay: .3
+    if (formData.brand.length > 0) {
+      document.querySelectorAll(".brand-btn").forEach((b) => {
+        b.classList.remove("btn-hover")
       })
-
-
+      setDisabledBrand(true)
+      document.querySelector(".step-count").textContent = "1"
+      document.querySelector("#back-slide").setAttribute("data-slide", "1")
+      var tl = gsap.timeline()
+        .to(".form-container2", {
+          opacity: 0,
+          duration: .5,
+          onComplete: () => {
+            document.querySelector(".form-container2").style.display = "none"
+          }
+        }, "a")
+        .to("#que1,#subtitle,#back-btn", {
+          opacity: 0,
+          duration: .5,
+        }, "a")
+        .to(".forms-pt2", {
+          onStart: () => {
+            document.querySelector(".submit-slide").style.display = "flex"
+          },
+          opacity: 1,
+          duration: 1,
+          delay: .3
+        })
 
 
       var countR = document.querySelector("#redirectCount")
@@ -276,35 +268,12 @@ const Section1 = () => {
         }
       }, 1000);
 
-
-    // setTimeout(() => {
-
-      // window.location.reload()
-      // var tl = gsap.timeline()
-      // tl
-      //   .to(".submit-slide", {
-      //     opacity: 0,
-      //     duration: .5,
-      //     onComplete: () => {
-      //       document.querySelector(".submit-slide").style.display = "none"
-      //     }
-      //   })
-      //   .to("#banner-content", {
-      //     y: 0,
-      //     opacity: 1,
-      //     duration: .5
-      //   }, "a")
-      //   .to(".corner ,#banner-btm ,#scrollformore", {
-      //     opacity: 1,
-      //     duration: .5,
-      //     onStart: () => {
-      //       document.querySelector("#banner-btm").style.display = "block"
-      //       document.querySelector("#back-btn").style.display = "none"
-      //     },
-      //   }, "a")
-
-    // }, 5000);
-
+    }
+  }
+  const handleBrandSelection = (brand, e) => {
+    e.preventDefault()
+    setFormData({ ...formData, brand: [...formData.brand, brand] })
+    e.target.querySelector(".checkbox").style.display = "block"
   }
 
   const handleInfoHover = (e) => {
@@ -408,8 +377,8 @@ const Section1 = () => {
           date: "",
           venue: "",
         },
-        interestedIn: "",
-        brand: "",
+        interestedIn: [],
+        brand: [],
       })
       var tl = gsap.timeline()
       tl
@@ -546,11 +515,11 @@ const Section1 = () => {
         opacity: 1,
         duration: .5
       })
-      .fromTo("#scrollformore",{
-        opacity:0
-      },{
-        opacity:1,
-        duration:.5,
+      .fromTo("#scrollformore", {
+        opacity: 0
+      }, {
+        opacity: 1,
+        duration: .5,
       })
   }, [])
 
@@ -563,28 +532,28 @@ const Section1 = () => {
       e.innerHTML = clutter
     })
 
-   setTimeout(() => {
-    setInterval(() => {
-      gsap.fromTo(".ptop span",{
-        y:"-11%",
-      },{
-        y:"-100%",
-        duration: 1,
-        stagger: {
-          amount: .4
-        },
-      })
-      gsap.fromTo(".pbtm span",{
-        y:"-11%",
-      },{
-        y:"-100%",
-        duration: 1,
-        stagger: {
-          amount: .4
-        },
-      })
-    }, 3000);
-   }, 2000);
+    setTimeout(() => {
+      setInterval(() => {
+        gsap.fromTo(".ptop span", {
+          y: "-11%",
+        }, {
+          y: "-100%",
+          duration: 1,
+          stagger: {
+            amount: .4
+          },
+        })
+        gsap.fromTo(".pbtm span", {
+          y: "-11%",
+        }, {
+          y: "-100%",
+          duration: 1,
+          stagger: {
+            amount: .4
+          },
+        })
+      }, 3000);
+    }, 2000);
 
 
     // var ps = document.querySelectorAll(".anime")
@@ -624,7 +593,7 @@ const Section1 = () => {
               <span id='icon-btn'><i className="ri-arrow-right-up-line"></i></span>
             </span>
           </div>
-         
+
         </div>
         <div id='banner-btm'>
           <div id='info-container'>
@@ -635,9 +604,9 @@ const Section1 = () => {
           </div>
         </div>
         <div id='scrollformore'>
-            <p className='ptop anime'>Scroll to know more</p>
-            <p className='pbtm anime'>Scroll to know more</p>
-          </div>
+          <p className='ptop anime'>Scroll to know more</p>
+          <p className='pbtm anime'>Scroll to know more</p>
+        </div>
         <img className='corner' id='corner1' src="/images/asset1.png" alt="" />
         <img className='corner' id='corner2' src="/images/asset2.png" alt="" />
         <div id='banner-card-container'>
@@ -764,7 +733,7 @@ const Section1 = () => {
                     <p>Are you or someone you know getting married?</p>
                     <div className='input-wrapper data-picker-wrapper'>
                       <div className='wedding-answer'>
-                        <button onClick={(e)=>handleAnswer(e)} className='done-btn details-btn btn-hover option-btn' disabled={disabledDetails}>
+                        <button onClick={(e) => handleAnswer(e)} className='done-btn details-btn btn-hover option-btn' disabled={disabledDetails}>
                           <p>If yes, please share the details!</p>
                         </button>
                         <button className='done-btn details-btn btn-hover option-btn' disabled={disabledDetails}>
@@ -811,15 +780,20 @@ const Section1 = () => {
                 <div className='input-container'>
                   <div className='input-box2'>
                     <p>What excites you the most when it comes to weddings?</p>
-                    <div className='input-wrapper btn-wrap-mobile'>
-                      <button className='done-btn interest-btn btn-hover option-btn ' onClick={(e) => handleInterestSelection("Wedding Wear Designers", e)} disabled={disabledInterest}>
-                        <p>Wedding Wear Designers <i className="ri-checkbox-circle-fill checkbox"></i></p>
-                      </button>
-                      <button className='done-btn interest-btn btn-hover option-btn' onClick={(e) => handleInterestSelection("Fine Jewellery", e)} disabled={disabledInterest}>
-                        <p>Fine Jewellery <i className="ri-checkbox-circle-fill checkbox"></i></p>
-                      </button>
-                      <button className='done-btn interest-btn btn-hover option-btn' onClick={(e) => handleInterestSelection("Trousseau & Wedding Services", e)} disabled={disabledInterest}>
-                        <p>Trousseau & Wedding Services <i className="ri-checkbox-circle-fill checkbox"></i></p>
+                    <div className='input-wrapper btn-wrap-main'>
+                      <div className='btn-wrap-mobile'>
+                        <button className='done-btn interest-btn btn-hover option-btn ' onClick={(e) => handleInterestSelection("Wedding Wear Designers", e)} disabled={disabledInterest}>
+                          <p>Wedding Wear Designers <i className="ri-checkbox-circle-fill checkbox"></i></p>
+                        </button>
+                        <button className='done-btn interest-btn btn-hover option-btn' onClick={(e) => handleInterestSelection("Fine Jewellery", e)} disabled={disabledInterest}>
+                          <p>Fine Jewellery <i className="ri-checkbox-circle-fill checkbox"></i></p>
+                        </button>
+                        <button className='done-btn interest-btn btn-hover option-btn' onClick={(e) => handleInterestSelection("Trousseau & Wedding Services", e)} disabled={disabledInterest}>
+                          <p>Trousseau & Wedding Services <i className="ri-checkbox-circle-fill checkbox"></i></p>
+                        </button>
+                      </div>
+                      <button className='done-btn interest-btn btn-hover' disabled={disabledInterest} >
+                        <p>done</p>
                       </button>
                     </div>
                   </div>
@@ -829,7 +803,8 @@ const Section1 = () => {
                 <div className='input-container'>
                   <div className='input-box2'>
                     <p>What excites you the most when it comes to weddings?</p>
-                    <div className='input-wrapper btn-wrap-mobile'>
+                    <div className='input-wrapper btn-wrap-main'>
+                      <div className='btn-wrap-mobile'>
                       <button className='done-btn brand-btn btn-hover option-btn' onClick={(e) => handleBrandSelection("Brand 1", e)} disabled={disableBrand}>
                         <p>Brand 1 <i className="ri-checkbox-circle-fill checkbox"></i></p>
                       </button>
@@ -837,7 +812,11 @@ const Section1 = () => {
                         <p>Brand 2 <i className="ri-checkbox-circle-fill checkbox"></i></p>
                       </button>
                       <button className='done-btn brand-btn btn-hover option-btn' onClick={(e) => handleBrandSelection("Brand 3", e)} disabled={disableBrand}>
-                        <p>Brand 3 <i className="ri-checkbox-circle-fill checkbox"></i></p>
+                        <p>Brand 3<i className="ri-checkbox-circle-fill checkbox"></i></p>
+                      </button>
+                      </div>
+                      <button className='done-btn brand-btn btn-hover' disabled={disableBrand} >
+                        <p>done</p>
                       </button>
                     </div>
                   </div>
