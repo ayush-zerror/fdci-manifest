@@ -28,6 +28,7 @@ const Section1 = () => {
     brand: "",
   })
 
+
   const nameRef = useRef(null);
   const contactRef = useRef(null);
   const emailRef = useRef(null);
@@ -180,15 +181,15 @@ const Section1 = () => {
   const handleDetail = (e) => {
     e.preventDefault()
     // if (formData.weddingDetails.date.trim().length > 0 && formData.weddingDetails.venue.trim().length > 0) {
-      setDisabledDetails(true)
-      document.querySelectorAll(".details-btn").forEach((b) => b.classList.remove("btn-hover"))
-      gsap.to(".forms-pt22", {
-        opacity: 1,
-        duration: 1,
-        onComplete: () => {
-          setDisabledInterest(false)
-        }
-      })
+    setDisabledDetails(true)
+    document.querySelectorAll(".details-btn").forEach((b) => b.classList.remove("btn-hover"))
+    gsap.to(".forms-pt22", {
+      opacity: 1,
+      duration: 1,
+      onComplete: () => {
+        setDisabledInterest(false)
+      }
+    })
     // }
   }
   const handleAnswer = () => {
@@ -219,7 +220,7 @@ const Section1 = () => {
     })
     // }
   }
-  const handleInterestSelection = (interestedIn,e) => {
+  const handleInterestSelection = (interestedIn, e) => {
     setFormData({ ...formData, interestedIn })
     e.target.querySelector(".checkbox").style.display = "block"
   }
@@ -232,9 +233,78 @@ const Section1 = () => {
     setDisabledBrand(true)
     // }
   }
-  const handleBrandSelection = (brand,e) => {
+  const handleBrandSelection = (brand, e) => {
     setFormData({ ...formData, brand })
     e.target.querySelector(".checkbox").style.display = "block"
+
+    setDisabledBrand(true)
+    document.querySelector(".step-count").textContent = "1"
+    document.querySelector("#back-slide").setAttribute("data-slide", "1")
+    var tl = gsap.timeline()
+      .to(".form-container2", {
+        opacity: 0,
+        duration: .5,
+        onComplete: () => {
+          document.querySelector(".form-container2").style.display = "none"
+        }
+      }, "a")
+      .to("#que1,#subtitle,#back-btn", {
+        opacity: 0,
+        duration: .5,
+      }, "a")
+      .to(".forms-pt2", {
+        onStart: () => {
+          document.querySelector(".submit-slide").style.display = "flex"
+        },
+        opacity: 1,
+        duration: 1,
+        delay: .3
+      })
+
+
+
+
+      var countR = document.querySelector("#redirectCount")
+      var interval = setInterval(() => {
+        countR.textContent = Number(countR.textContent) - 1
+        if (Number(countR.textContent) === 0) {
+          clearInterval(interval);
+          countR.textContent = "Redirecting...";
+          setTimeout(() => {
+            // window.location.reload()
+          }, 3000);
+        }
+      }, 1000);
+
+
+    // setTimeout(() => {
+
+      // window.location.reload()
+      // var tl = gsap.timeline()
+      // tl
+      //   .to(".submit-slide", {
+      //     opacity: 0,
+      //     duration: .5,
+      //     onComplete: () => {
+      //       document.querySelector(".submit-slide").style.display = "none"
+      //     }
+      //   })
+      //   .to("#banner-content", {
+      //     y: 0,
+      //     opacity: 1,
+      //     duration: .5
+      //   }, "a")
+      //   .to(".corner ,#banner-btm ,#scrollformore", {
+      //     opacity: 1,
+      //     duration: .5,
+      //     onStart: () => {
+      //       document.querySelector("#banner-btm").style.display = "block"
+      //       document.querySelector("#back-btn").style.display = "none"
+      //     },
+      //   }, "a")
+
+    // }, 5000);
+
   }
 
 
@@ -255,7 +325,7 @@ const Section1 = () => {
         opacity: 0,
         duration: .5
       }, "a")
-      .to(".corner ,#banner-btm", {
+      .to(".corner ,#banner-btm ,#scrollformore", {
         opacity: 0,
         duration: .5,
         onStart: () => {
@@ -446,8 +516,8 @@ const Section1 = () => {
           .to(".forms-light", {
             opacity: .3,
             duration: .5,
-            onComplete:()=>{
-             nameRef.current.focus()
+            onComplete: () => {
+              nameRef.current.focus()
             }
           })
       })
@@ -477,6 +547,44 @@ const Section1 = () => {
         opacity: 1,
         duration: .5
       })
+      .fromTo("#scrollformore",{
+        opacity:0
+      },{
+        opacity:1,
+        duration:.5,
+      })
+  }, [])
+
+  useEffect(() => {
+    document.querySelectorAll(".anime").forEach(function (e) {
+      var clutter = ""
+      e.textContent.split("").forEach(function (l) {
+        clutter += `<span>${l === " " ? "&nbsp;" : l}</span>`;
+      })
+      e.innerHTML = clutter
+    })
+
+    var ps = document.querySelectorAll(".anime")
+    var index = 0
+    gsap.to(ps[index].querySelectorAll("span"), {
+      y: "-100%",
+      duration: 1,
+      stagger: {
+        amount: .3
+      },
+      delay: 10,
+      onComplete: function () {
+        gsap.set(ps[index].querySelectorAll("span"), { y: "100%" })
+      }
+    })
+    gsap.to(".pbtm span", {
+      y: "-100%",
+      duration: 1,
+      stagger: {
+        amount: .3
+      },
+      delay: 10
+    })
   }, [])
 
   return (
@@ -493,6 +601,7 @@ const Section1 = () => {
               <span id='icon-btn'><i className="ri-arrow-right-up-line"></i></span>
             </span>
           </div>
+         
         </div>
         <div id='banner-btm'>
           <div id='info-container'>
@@ -502,6 +611,10 @@ const Section1 = () => {
             <p>This website does not collect personal data and does not use cookies, as the settings are saved in your own browser.</p>
           </div>
         </div>
+        <div id='scrollformore'>
+            <p className='ptop anime'>Scroll to know more</p>
+            <p className='pbtm anime'>Scroll to know more</p>
+          </div>
         <img className='corner' id='corner1' src="/images/asset1.png" alt="" />
         <img className='corner' id='corner2' src="/images/asset2.png" alt="" />
         <div id='banner-card-container'>
@@ -542,7 +655,7 @@ const Section1 = () => {
                   <div className='input-box'>
                     <p>What's your name?</p>
                     <div className='input-wrapper'>
-                      <input type="text" disabled={disabledName} ref={nameRef}  id='namefield' name='name' onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} value={formData.name} required maxLength="20" placeholder='Enter your first name' />
+                      <input type="text" disabled={disabledName} ref={nameRef} id='namefield' name='name' onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} value={formData.name} required maxLength="20" placeholder='Enter your first name' />
                       <button className='done-btn name-btn btn-hover' disabled={disabledName} >
                         <p>done</p>
                       </button>
@@ -556,7 +669,7 @@ const Section1 = () => {
                     <div className='input-box'>
                       <p>Drop your contact number so we can stay in touch!</p>
                       <div className='input-wrapper'>
-                        <input type="text" name='contact' ref={contactRef} id='contactfield'  disabled={disabledcontact} required onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} value={formData.contact} placeholder='Enter your contact number' />
+                        <input type="text" name='contact' ref={contactRef} id='contactfield' disabled={disabledcontact} required onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} value={formData.contact} placeholder='Enter your contact number' />
                         <button className='done-btn contact-btn btn-hover' disabled={disabledcontact}>
                           <p>done</p>
                         </button>
@@ -564,7 +677,7 @@ const Section1 = () => {
                     </div>
                   </div>
                 </form>
-                <form action="" autoComplete='off'  onSubmit={handleEmail} className=' forms-light form3'>
+                <form action="" autoComplete='off' onSubmit={handleEmail} className=' forms-light form3'>
                   <div className='input-container'>
                     <div className='input-box'>
                       <p>Please enter your email address</p>
@@ -606,7 +719,7 @@ const Section1 = () => {
                   </div>
                 </form>
               </div>
-              <form action="" autoComplete='off'  onSubmit={handleCity} className='forms forms-light form6'>
+              <form action="" autoComplete='off' onSubmit={handleCity} className='forms forms-light form6'>
                 <div className='input-container'>
                   <div className='input-box'>
                     <p>Where are you located?</p>
@@ -676,14 +789,14 @@ const Section1 = () => {
                   <div className='input-box2'>
                     <p>What excites you the most when it comes to weddings?</p>
                     <div className='input-wrapper btn-wrap-mobile'>
-                      <button className='done-btn interest-btn btn-hover option-btn ' onClick={(e) => handleInterestSelection("Wedding Wear Designers",e)} disabled={disabledInterest}>
-                        <p>Wedding Wear Designers <i class="ri-checkbox-circle-fill checkbox"></i></p> 
+                      <button className='done-btn interest-btn btn-hover option-btn ' onClick={(e) => handleInterestSelection("Wedding Wear Designers", e)} disabled={disabledInterest}>
+                        <p>Wedding Wear Designers <i className="ri-checkbox-circle-fill checkbox"></i></p>
                       </button>
-                      <button className='done-btn interest-btn btn-hover option-btn' onClick={(e) => handleInterestSelection("Fine Jewellery",e)} disabled={disabledInterest}>
-                        <p>Fine Jewellery <i class="ri-checkbox-circle-fill checkbox"></i></p>
+                      <button className='done-btn interest-btn btn-hover option-btn' onClick={(e) => handleInterestSelection("Fine Jewellery", e)} disabled={disabledInterest}>
+                        <p>Fine Jewellery <i className="ri-checkbox-circle-fill checkbox"></i></p>
                       </button>
-                      <button className='done-btn interest-btn btn-hover option-btn' onClick={(e) => handleInterestSelection("Trousseau & Wedding Services",e)} disabled={disabledInterest}>
-                        <p>Trousseau & Wedding Services <i class="ri-checkbox-circle-fill checkbox"></i></p>
+                      <button className='done-btn interest-btn btn-hover option-btn' onClick={(e) => handleInterestSelection("Trousseau & Wedding Services", e)} disabled={disabledInterest}>
+                        <p>Trousseau & Wedding Services <i className="ri-checkbox-circle-fill checkbox"></i></p>
                       </button>
                     </div>
                   </div>
@@ -694,19 +807,24 @@ const Section1 = () => {
                   <div className='input-box2'>
                     <p>What excites you the most when it comes to weddings?</p>
                     <div className='input-wrapper btn-wrap-mobile'>
-                      <button className='done-btn brand-btn btn-hover option-btn' onClick={(e) => handleBrandSelection("Brand 1",e)} disabled={disableBrand}>
-                        <p>Brand 1 <i class="ri-checkbox-circle-fill checkbox"></i></p>
+                      <button className='done-btn brand-btn btn-hover option-btn' onClick={(e) => handleBrandSelection("Brand 1", e)} disabled={disableBrand}>
+                        <p>Brand 1 <i className="ri-checkbox-circle-fill checkbox"></i></p>
                       </button>
-                      <button className='done-btn brand-btn btn-hover option-btn' onClick={(e) => handleBrandSelection("Brand 2",e)} disabled={disableBrand}>
-                        <p>Brand 2 <i class="ri-checkbox-circle-fill checkbox"></i></p>
+                      <button className='done-btn brand-btn btn-hover option-btn' onClick={(e) => handleBrandSelection("Brand 2", e)} disabled={disableBrand}>
+                        <p>Brand 2 <i className="ri-checkbox-circle-fill checkbox"></i></p>
                       </button>
-                      <button className='done-btn brand-btn btn-hover option-btn' onClick={(e) => handleBrandSelection("Brand 3",e)} disabled={disableBrand}>
-                        <p>Brand 3 <i class="ri-checkbox-circle-fill checkbox"></i></p>
+                      <button className='done-btn brand-btn btn-hover option-btn' onClick={(e) => handleBrandSelection("Brand 3", e)} disabled={disableBrand}>
+                        <p>Brand 3 <i className="ri-checkbox-circle-fill checkbox"></i></p>
                       </button>
                     </div>
                   </div>
                 </div>
               </form>
+            </div>
+            <div className='submit-slide'>
+              <i class="ri-checkbox-circle-fill"></i>
+              <h4>Thank you for showing interest</h4>
+              <p>You will be redirected to the homepage in <span id='redirectCount'>5</span> seconds...</p>
             </div>
           </div>
         </div>
