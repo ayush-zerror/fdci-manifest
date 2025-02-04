@@ -343,6 +343,16 @@ body {
   flex-direction: column;
   gap: 1vw;
 }
+.input-half{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.input-half form{
+  width: calc(50% - .5vw);
+}
 
 .form-container2 {
   position: absolute;
@@ -366,7 +376,7 @@ body {
 
 .input-container {
   width: 100%;
-  background-color: #2a2a2a;
+  background-color: #e4d5ba;
   border-radius: 10px;
 }
 
@@ -378,15 +388,15 @@ body {
 }
 .input-box > p {
   font-size: 13px;
-  color: #e4d5ba;
+  color: #333333;
   padding: 0.7vw 1.5vw;
-  border-bottom: 1px solid #e4d5ba1e;
+  border-bottom: 1px solid #33333352;
 }
 .input-box2 > p {
   font-size: 13px;
-  color: #e4d5ba;
+  color: #333333;
   padding: 0.7vw 1.5vw;
-  border-bottom: 1px solid #e4d5ba1e;
+  border-bottom: 1px solid #33333352;
 }
 .input-wrapper {
   padding: 1.2vw 1.5vw;
@@ -401,13 +411,13 @@ body {
   font-weight: 500;
   padding: 5px 0;
   width: 100%;
-  color: #e4d5ba;
+  color: #333333;
   background-color: transparent;
   border: none;
   outline: none;
 }
 .input-wrapper input::placeholder {
-  color: #e4d5ba5d;
+  color: #222222a0;
   font-weight: 400;
 }
 
@@ -420,7 +430,7 @@ body {
 }
 
 .done-btn.btn-hover:hover {
-  background-color: #e4d5ba;
+  background-color: #d1ab68;
   color: #222222;
 }
 
@@ -431,6 +441,34 @@ body {
   padding: 8px 35px;
   font-weight: 500;
 }
+.wedding-answer{
+  display: flex;
+  align-items: center;
+}
+.wedding-details-input{
+  display: flex;
+  align-items: center;
+  gap: 2vw;
+}
+.wedding-details{
+  width: 100%;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  opacity: 0;
+}
+.done-date-picker{
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  gap: 5px;
+  color: #333333;
+}
+
+.done-date-picker p{
+  white-space: nowrap;
+}
+
 .option-btn {
   margin-right: 2vw;
 }
@@ -478,7 +516,18 @@ body {
 @media (max-width: 400px) {
   .home-section1 {
     height: 100svh;
-    padding: 3vw !important;
+    padding: 0 !important;
+  }
+  .hero-banner{
+    border-radius: 0 !important;
+  }
+  .input-half {
+    flex-direction: column;
+    align-items: center;
+    gap: 3vw;
+  }
+  .input-half form{
+    width: 100%;
   }
   #corner2 {
     width: 50%;
@@ -505,7 +554,7 @@ body {
   }
   #back-btn {
     top: 5vw;
-    left: 1.5vw;
+    left: 3.5vw;
     font-size: 18px;
   }
   #count {
@@ -522,10 +571,23 @@ body {
   .form-container {
     gap: 3vw;
     user-select: none;
+    overflow-y: auto;
+    height: 70vh;
   }
   .form-container2 {
     gap: 3vw;
     user-select: none;
+  }
+  .data-picker-wrapper{
+    display: flex;
+    flex-direction: column !important;
+  }
+ 
+  .wedding-details-input{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-bottom: 3vw;
   }
   .done-btn p {
     border: none;
@@ -555,7 +617,14 @@ body {
   .input-wrapper {
     padding: 3vw 3vw;
     display: flex;
+    width: 100%;
   }
+
+  #dateInput{
+    display: flex;
+    width: 100%;
+  }
+
   .card-wrapper {
     margin-top: 2vw;
   }
@@ -567,7 +636,7 @@ body {
     overflow-x: auto;
   }
   #banner-card-container {
-    padding: 33vw 2.5vw;
+    padding: 33vw 4vw;
     padding-top: 18vw;
   }
   .banner-card {

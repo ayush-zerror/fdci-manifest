@@ -7,11 +7,13 @@ const Section1 = () => {
   const [disabledEmail, setDisabledEmail] = useState(true)
   const [disabledcontact, setDisabledcontact] = useState(true)
   const [disabledCity, setDisabledCity] = useState(true)
-  const [disabledOccupation, setDisabledOccupation] = useState(false)
+  const [disabledOccupation, setDisabledOccupation] = useState(true)
   const [disabledInstagram, setDisabledInstagram] = useState(true)
-  const [disabledDetails, setDisabledDetails] = useState(true)
+  const [disabledDetails, setDisabledDetails] = useState(false)
   const [disabledInterest, setDisabledInterest] = useState(true)
+  const [disableBrand, setDisabledBrand] = useState(true)
   const [formData, setFormData] = useState({
+    category: '',
     name: '',
     contact: '',
     email: '',
@@ -23,7 +25,10 @@ const Section1 = () => {
       venue: "",
     },
     interestedIn: "",
+    brand: "",
   })
+
+  // STEP 2ND HANDLERS
   const handleName = (e) => {
     e.preventDefault()
     if (formData.name.trim().length > 0) {
@@ -61,11 +66,39 @@ const Section1 = () => {
         opacity: 1,
         duration: 1,
         onComplete: () => {
-          setDisabledCity(false)
+          setDisabledOccupation(false)
         }
       })
     }
 
+  }
+  const handleOccupation = (e) => {
+    e.preventDefault()
+    if (formData.occupation.trim().length > 0) {
+      setDisabledOccupation(true)
+      document.querySelector(".occupation-btn").classList.remove("btn-hover")
+      gsap.to(".form5", {
+        opacity: 1,
+        duration: .5,
+        onComplete: () => {
+          setDisabledInstagram(false)
+        }
+      })
+    }
+  }
+  const handleInstagram = (e) => {
+    e.preventDefault()
+    if (formData.instagram.trim().length > 0) {
+      setDisabledInstagram(true)
+      document.querySelector(".instagram-btn").classList.remove("btn-hover")
+      gsap.to(".form6", {
+        opacity: 1,
+        duration: 1,
+        onComplete: () => {
+          setDisabledCity(false)
+        }
+      })
+    }
   }
   const handleCity = (e) => {
     e.preventDefault()
@@ -101,57 +134,70 @@ const Section1 = () => {
 
     }
   }
-  const handleOccupation = (e) => {
+  // STEP 2ND HANDLERS END
+
+
+  // STEP 3ND HANDLERS 
+
+  const handleDetail = (e) => {
     e.preventDefault()
-    if (formData.occupation.trim().length > 0) {
-      setDisabledOccupation(true)
-      document.querySelector(".occupation-btn").classList.remove("btn-hover")
-      gsap.to(".forms-pt21", {
-        opacity: 1,
-        duration: .5,
-        onComplete: () => {
-          setDisabledInstagram(false)
-        }
-      })
-    }
-  }
-  const handleInstagram = (e) => {
-    e.preventDefault()
-    if (formData.instagram.trim().length > 0) {
-      setDisabledInstagram(true)
-      document.querySelector(".instagram-btn").classList.remove("btn-hover")
+
+    if (formData.weddingDetails.date.trim().length > 0 && formData.weddingDetails.venue.trim().length > 0) {
+      setDisabledDetails(true)
+      document.querySelectorAll(".details-btn").forEach((b) => b.classList.remove("btn-hover"))
       gsap.to(".forms-pt22", {
         opacity: 1,
         duration: 1,
         onComplete: () => {
-          setDisabledDetails(false)
+          setDisabledInterest(false)
         }
       })
     }
   }
-  const handleDetail = (e) => {
-    e.preventDefault()
-    // if (formData.weddingDetails.date.trim().length > 0 && formData.weddingDetails.venue.trim().length > 0) {
-    setDisabledDetails(true)
-    document.querySelectorAll(".details-btn").forEach((b) => b.classList.remove("btn-hover"))
-    gsap.to(".forms-pt23", {
-      opacity: 1,
-      duration: 1,
+  const handleAnswer = () => {
+    gsap.to(".wedding-answer", {
+      opacity: 0,
+      duration: .3,
       onComplete: () => {
-        setDisabledInterest(false)
+        document.querySelector(".wedding-answer").style.display = "none"
+        document.querySelector(".wedding-details").style.display = "flex"
+        document.querySelector(".wedding-details").style.opacity = 1
       }
     })
-    // }
+
   }
   const handleInterest = (e) => {
     e.preventDefault()
     // if (formData.interestedIn.trim().length > 0) {
-      document.querySelectorAll(".interest-btn").forEach((b)=>{
-        b.classList.remove("btn-hover")
-      })
-      setDisabledInterest(true)
+    document.querySelectorAll(".interest-btn").forEach((b) => {
+      b.classList.remove("btn-hover")
+    })
+    setDisabledInterest(true)
+    gsap.to(".forms-pt23", {
+      opacity: 1,
+      duration: 1,
+      onComplete: () => {
+        setDisabledBrand(false)
+      }
+    })
     // }
   }
+  const handleInterestSelection = (interestedIn) => {
+    setFormData({ ...formData, interestedIn })
+  }
+  const handleBrand = (e) => {
+    e.preventDefault()
+    // if (formData.interestedIn.trim().length > 0) {
+    document.querySelectorAll(".brand-btn").forEach((b) => {
+      b.classList.remove("btn-hover")
+    })
+    setDisabledBrand(true)
+    // }
+  }
+  const handleBrandSelection = (brand) => {
+    setFormData({ ...formData, brand })
+  }
+
 
   const handleInfoHover = (e) => {
     document.querySelector("#info-container").style.color = "#e4d5ba";
@@ -241,7 +287,7 @@ const Section1 = () => {
         .to(".input-box,#question2,#subtitle", {
           opacity: 0,
           duration: .5,
-          onComplete:()=>{
+          onComplete: () => {
             document.querySelector("#subtitle").style.display = "none"
           }
         })
@@ -304,6 +350,8 @@ const Section1 = () => {
       card.addEventListener("click", function () {
         document.querySelector(".step-count").textContent = "2"
         document.querySelector("#back-slide").setAttribute("data-slide", "2")
+        var category = card.getAttribute("data-category")
+        setFormData({ ...formData, category: category })
         var tl = gsap.timeline()
         tl
           .to("#cards", {
@@ -354,7 +402,7 @@ const Section1 = () => {
       .to(".home-section1", {
         padding: "1vw",
         duration: .5,
-      },"s")
+      }, "s")
       .to(".hero-banner", {
         borderRadius: "20px",
         opacity: 1,
@@ -401,21 +449,21 @@ const Section1 = () => {
 
           <div className='card-wrapper'>
             <div id='cards'>
-              <div className="banner-card">
+              <div className="banner-card" data-category="bride">
                 <div className='card-content'>
                   <p>bride</p>
                   <img src="/images/bride.png" alt="" />
                   <h3>Explore my website with moderate animations, a customized dashboard, and more information about me.</h3>
                 </div>
               </div>
-              <div className="banner-card">
+              <div className="banner-card" data-category="groom">
                 <div className='card-content'>
                   <p>groom</p>
                   <img src="/images/groom.png" alt="" />
                   <h3>Explore my website with moderate animations, a customized dashboard, and more information about me.</h3>
                 </div>
               </div>
-              <div className="banner-card">
+              <div className="banner-card" data-category="family">
                 <div className='card-content'>
                   <p>family</p>
                   <img src="/images/family.png" alt="" />
@@ -437,33 +485,63 @@ const Section1 = () => {
                   </div>
                 </div>
               </form>
-              <form action="" autoComplete='off' onSubmit={handleContact} className='forms forms-light form2'>
-                <div className='input-container'>
-                  <div className='input-box'>
-                    <p>Drop your contact number so we can stay in touch!</p>
-                    <div className='input-wrapper'>
-                      <input type="text" name='contact' disabled={disabledcontact} required onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} value={formData.contact} placeholder='Enter your contact number' />
-                      <button className='done-btn contact-btn btn-hover' disabled={disabledcontact}>
-                        <p>done</p>
-                      </button>
+              <div className='input-half forms'>
+                <form action="" autoComplete='off' onSubmit={handleContact} className=' forms-light form2'>
+                  <div className='input-container'>
+                    <div className='input-box'>
+                      <p>Drop your contact number so we can stay in touch!</p>
+                      <div className='input-wrapper'>
+                        <input type="text" name='contact' disabled={disabledcontact} required onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} value={formData.contact} placeholder='Enter your contact number' />
+                        <button className='done-btn contact-btn btn-hover' disabled={disabledcontact}>
+                          <p>done</p>
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </form>
-              <form action="" autoComplete='off' onSubmit={handleEmail} className='forms forms-light form3'>
-                <div className='input-container'>
-                  <div className='input-box'>
-                    <p>Please enter your email address</p>
-                    <div className='input-wrapper'>
-                      <input type="email" placeholder='Enter your email ID' name='email' required disabled={disabledEmail} onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} value={formData.email} />
-                      <button className='done-btn email-btn btn-hover' disabled={disabledEmail}>
-                        <p>done</p>
-                      </button>
+                </form>
+                <form action="" autoComplete='off' onSubmit={handleEmail} className=' forms-light form3'>
+                  <div className='input-container'>
+                    <div className='input-box'>
+                      <p>Please enter your email address</p>
+                      <div className='input-wrapper'>
+                        <input type="email" placeholder='Enter your email ID' name='email' required disabled={disabledEmail} onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} value={formData.email} />
+                        <button className='done-btn email-btn btn-hover' disabled={disabledEmail}>
+                          <p>done</p>
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </form>
-              <form action="" autoComplete='off' onSubmit={handleCity} className='forms forms-light form4'>
+                </form>
+              </div>
+              <div className='input-half forms'>
+                <form action="" autoComplete='off' onSubmit={handleOccupation} className=' forms-light form4'>
+                  <div className='input-container'>
+                    <div className='input-box'>
+                      <p>Please enter your occupation.</p>
+                      <div className='input-wrapper'>
+                        <input type="text" name='occupation' required disabled={disabledOccupation} onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} value={formData.occupation} placeholder='Enter your occupation' />
+                        <button className='done-btn occupation-btn btn-hover' disabled={disabledOccupation}>
+                          <p>done</p>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                <form action="" autoComplete='off' onSubmit={handleInstagram} className=' forms-light form5'>
+                  <div className='input-container'>
+                    <div className='input-box'>
+                      <p>What’s your Instagram handle?</p>
+                      <div className='input-wrapper'>
+                        <input type="text" name='instagram' required disabled={disabledInstagram} onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} value={formData.instagram} placeholder='Enter your Instagram handle' />
+                        <button className='done-btn instagram-btn btn-hover' disabled={disabledInstagram}>
+                          <p>done</p>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <form action="" autoComplete='off' onSubmit={handleCity} className='forms forms-light form6'>
                 <div className='input-container'>
                   <div className='input-box'>
                     <p>Where are you located?</p>
@@ -480,60 +558,86 @@ const Section1 = () => {
               </form>
             </div>
             <div className='form-container2'>
-              <form action="" autoComplete='off' onSubmit={handleOccupation} className='forms-pt2'>
-                <div className='input-container'>
-                  <div className='input-box2'>
-                    <p>Please enter your occupation.</p>
-                    <div className='input-wrapper'>
-                      <input type="text" name='occupation' required disabled={disabledOccupation} onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} value={formData.occupation} placeholder='Enter your occupation' />
-                      <button className='done-btn occupation-btn btn-hover' disabled={disabledOccupation}>
-                        <p>done</p>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </form>
-              <form action="" autoComplete='off' onSubmit={handleInstagram} className='forms-pt2 forms-light2 forms-pt21'>
-                <div className='input-container'>
-                  <div className='input-box2'>
-                    <p>What’s your Instagram handle?</p>
-                    <div className='input-wrapper'>
-                      <input type="text" name='instagram' required disabled={disabledInstagram} onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} value={formData.instagram} placeholder='Enter your Instagram handle' />
-                      <button className='done-btn instagram-btn btn-hover' disabled={disabledInstagram}>
-                        <p>done</p>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </form>
-              <form action="" autoComplete='off' onSubmit={handleDetail} className='forms-pt2 forms-light2 forms-pt22'>
+              <form action="" autoComplete='off' onSubmit={handleDetail} className='forms-pt2 forms-pt21'>
                 <div className='input-container'>
                   <div className='input-box2'>
                     <p>Are you or someone you know getting married?</p>
-                    <div className='input-wrapper'>
-                      <button className='done-btn details-btn btn-hover option-btn' disabled={disabledDetails}>
-                        <p>If yes, please share the details!</p>
-                      </button>
-                      <button className='done-btn details-btn btn-hover option-btn' disabled={disabledDetails}>
-                        <p>No</p>
-                      </button>
+                    <div className='input-wrapper data-picker-wrapper'>
+                      <div className='wedding-answer'>
+                        <div onClick={handleAnswer} className='done-btn details-btn btn-hover option-btn' disabled={disabledDetails}>
+                          <p>If yes, please share the details!</p>
+                        </div>
+                        <button className='done-btn details-btn btn-hover option-btn' disabled={disabledDetails}>
+                          <p>No</p>
+                        </button>
+                      </div>
+                      <div className='wedding-details'>
+                        <div className='wedding-details-input'>
+                          <div className='done-date-picker details-btn btn-hover'>
+                            <p>Wedding Date: </p>
+                            <input className='' type="date" value={formData.weddingDetails.date}
+                              onChange={(e) =>
+                                setFormData((prevData) => ({
+                                  ...prevData,
+                                  weddingDetails: {
+                                    ...prevData.weddingDetails,
+                                    date: e.target.value,
+                                  },
+                                }))
+                              } name="date" id="" />
+                          </div>
+                          <div className='done-date-picker details-btn btn-hover' >
+                            <p>Wedding Venu: </p>
+                            <input className='' type="text" name="venue" id="" onChange={(e) =>
+                              setFormData((prevData) => ({
+                                ...prevData,
+                                weddingDetails: {
+                                  ...prevData.weddingDetails,
+                                  venue: e.target.value,
+                                },
+                              }))
+                            } value={formData.weddingDetails.venue} placeholder='Enter Wedding Venue' />
+                          </div>
+                        </div>
+                        <button className='done-btn name-btn btn-hover'>
+                          <p>done</p>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
               </form>
-              <form action="" autoComplete='off' onSubmit={handleInterest} className='forms-pt2 forms-light2 forms-pt23'>
+              <form action="" autoComplete='off' onSubmit={handleInterest} className='forms-pt2 forms-light2 forms-pt22'>
                 <div className='input-container'>
                   <div className='input-box2'>
                     <p>What excites you the most when it comes to weddings?</p>
                     <div className='input-wrapper btn-wrap-mobile'>
-                      <button className='done-btn interest-btn btn-hover option-btn' disabled={disabledInterest}>
+                      <button className='done-btn interest-btn btn-hover option-btn ' onClick={() => handleInterestSelection("Wedding Wear Designers")} disabled={disabledInterest}>
                         <p>Wedding Wear Designers</p>
                       </button>
-                      <button className='done-btn interest-btn btn-hover option-btn' disabled={disabledInterest}>
+                      <button className='done-btn interest-btn btn-hover option-btn' onClick={() => handleInterestSelection("Fine Jewellery")} disabled={disabledInterest}>
                         <p>Fine Jewellery</p>
                       </button>
-                      <button className='done-btn interest-btn btn-hover option-btn' disabled={disabledInterest}>
+                      <button className='done-btn interest-btn btn-hover option-btn' onClick={() => handleInterestSelection("Trousseau & Wedding Services")} disabled={disabledInterest}>
                         <p>Trousseau & Wedding Services</p>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <form action="" autoComplete='off' onSubmit={handleBrand} className='forms-pt2 forms-light2 forms-pt23'>
+                <div className='input-container'>
+                  <div className='input-box2'>
+                    <p>What excites you the most when it comes to weddings?</p>
+                    <div className='input-wrapper btn-wrap-mobile'>
+                      <button className='done-btn brand-btn btn-hover option-btn' onClick={() => handleBrandSelection("Brand 1")} disabled={disableBrand}>
+                        <p>Brand 1</p>
+                      </button>
+                      <button className='done-btn brand-btn btn-hover option-btn' onClick={() => handleBrandSelection("Brand 2")} disabled={disableBrand}>
+                        <p>Brand 2</p>
+                      </button>
+                      <button className='done-btn brand-btn btn-hover option-btn' onClick={() => handleBrandSelection("Brand 3")} disabled={disableBrand}>
+                        <p>Brand 3</p>
                       </button>
                     </div>
                   </div>
