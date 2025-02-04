@@ -1,5 +1,5 @@
 import gsap from 'gsap';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 const Section1 = () => {
 
@@ -28,10 +28,19 @@ const Section1 = () => {
     brand: "",
   })
 
+  const nameRef = useRef(null);
+  const contactRef = useRef(null);
+  const emailRef = useRef(null);
+  const occupationRef = useRef(null);
+  const instaRef = useRef(null);
+  const cityRef = useRef(null);
+
+
   // STEP 2ND HANDLERS
   const handleName = (e) => {
     e.preventDefault()
     if (formData.name.trim().length > 0) {
+      nameRef.current.blur()
       setDisabledName(true)
       document.querySelector(".name-btn").classList.remove("btn-hover")
       gsap.to(".form2", {
@@ -39,6 +48,11 @@ const Section1 = () => {
         duration: .5,
         onComplete: () => {
           setDisabledcontact(false)
+          setTimeout(() => {
+            if (contactRef.current) {
+              contactRef.current.focus();
+            }
+          }, 500);
         }
       })
     }
@@ -46,6 +60,7 @@ const Section1 = () => {
   const handleContact = (e) => {
     e.preventDefault()
     if (formData.contact.trim().length > 0) {
+      contactRef.current.blur();
       setDisabledcontact(true)
       document.querySelector(".contact-btn").classList.remove("btn-hover")
       gsap.to(".form3", {
@@ -53,6 +68,11 @@ const Section1 = () => {
         duration: .5,
         onComplete: () => {
           setDisabledEmail(false)
+          setTimeout(() => {
+            if (emailRef.current) {
+              emailRef.current.focus();
+            }
+          }, 500);
         }
       })
     }
@@ -60,6 +80,7 @@ const Section1 = () => {
   const handleEmail = (e) => {
     e.preventDefault()
     if (formData.email.trim().length > 0) {
+      emailRef.current.blur();
       setDisabledEmail(true)
       document.querySelector(".email-btn").classList.remove("btn-hover")
       gsap.to(".form4", {
@@ -67,6 +88,11 @@ const Section1 = () => {
         duration: 1,
         onComplete: () => {
           setDisabledOccupation(false)
+          setTimeout(() => {
+            if (occupationRef.current) {
+              occupationRef.current.focus();
+            }
+          }, 500);
         }
       })
     }
@@ -75,6 +101,7 @@ const Section1 = () => {
   const handleOccupation = (e) => {
     e.preventDefault()
     if (formData.occupation.trim().length > 0) {
+      occupationRef.current.blur()
       setDisabledOccupation(true)
       document.querySelector(".occupation-btn").classList.remove("btn-hover")
       gsap.to(".form5", {
@@ -82,6 +109,11 @@ const Section1 = () => {
         duration: .5,
         onComplete: () => {
           setDisabledInstagram(false)
+          setTimeout(() => {
+            if (instaRef.current) {
+              instaRef.current.focus();
+            }
+          }, 500);
         }
       })
     }
@@ -89,6 +121,7 @@ const Section1 = () => {
   const handleInstagram = (e) => {
     e.preventDefault()
     if (formData.instagram.trim().length > 0) {
+      instaRef.current.blur();
       setDisabledInstagram(true)
       document.querySelector(".instagram-btn").classList.remove("btn-hover")
       gsap.to(".form6", {
@@ -96,6 +129,11 @@ const Section1 = () => {
         duration: 1,
         onComplete: () => {
           setDisabledCity(false)
+          setTimeout(() => {
+            if (cityRef.current) {
+              cityRef.current.focus();
+            }
+          }, 500);
         }
       })
     }
@@ -182,8 +220,9 @@ const Section1 = () => {
     })
     // }
   }
-  const handleInterestSelection = (interestedIn) => {
+  const handleInterestSelection = (interestedIn,e) => {
     setFormData({ ...formData, interestedIn })
+    e.target.querySelector(".checkbox").style.display = "block"
   }
   const handleBrand = (e) => {
     e.preventDefault()
@@ -194,8 +233,9 @@ const Section1 = () => {
     setDisabledBrand(true)
     // }
   }
-  const handleBrandSelection = (brand) => {
+  const handleBrandSelection = (brand,e) => {
     setFormData({ ...formData, brand })
+    e.target.querySelector(".checkbox").style.display = "block"
   }
 
 
@@ -407,6 +447,9 @@ const Section1 = () => {
           .to(".forms-light", {
             opacity: .3,
             duration: .5,
+            onComplete:()=>{
+             nameRef.current.focus()
+            }
           })
       })
     })
@@ -500,8 +543,8 @@ const Section1 = () => {
                   <div className='input-box'>
                     <p>What's your name?</p>
                     <div className='input-wrapper'>
-                      <input type="text" disabled={disabledName} name='name' onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} value={formData.name} required maxLength="20" placeholder='Enter your first name' />
-                      <button className='done-btn name-btn btn-hover' disabled={disabledName}>
+                      <input type="text" disabled={disabledName} ref={nameRef}  id='namefield' name='name' onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} value={formData.name} required maxLength="20" placeholder='Enter your first name' />
+                      <button className='done-btn name-btn btn-hover' disabled={disabledName} >
                         <p>done</p>
                       </button>
                     </div>
@@ -514,7 +557,7 @@ const Section1 = () => {
                     <div className='input-box'>
                       <p>Drop your contact number so we can stay in touch!</p>
                       <div className='input-wrapper'>
-                        <input type="text" name='contact' disabled={disabledcontact} required onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} value={formData.contact} placeholder='Enter your contact number' />
+                        <input type="text" name='contact' ref={contactRef} id='contactfield'  disabled={disabledcontact} required onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} value={formData.contact} placeholder='Enter your contact number' />
                         <button className='done-btn contact-btn btn-hover' disabled={disabledcontact}>
                           <p>done</p>
                         </button>
@@ -522,12 +565,12 @@ const Section1 = () => {
                     </div>
                   </div>
                 </form>
-                <form action="" autoComplete='off' onSubmit={handleEmail} className=' forms-light form3'>
+                <form action="" autoComplete='off'  onSubmit={handleEmail} className=' forms-light form3'>
                   <div className='input-container'>
                     <div className='input-box'>
                       <p>Please enter your email address</p>
                       <div className='input-wrapper'>
-                        <input type="email" placeholder='Enter your email ID' name='email' required disabled={disabledEmail} onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} value={formData.email} />
+                        <input type="email" ref={emailRef} placeholder='Enter your email ID' name='email' id='emailfield' required disabled={disabledEmail} onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} value={formData.email} />
                         <button className='done-btn email-btn btn-hover' disabled={disabledEmail}>
                           <p>done</p>
                         </button>
@@ -542,7 +585,7 @@ const Section1 = () => {
                     <div className='input-box'>
                       <p>Please enter your occupation.</p>
                       <div className='input-wrapper'>
-                        <input type="text" name='occupation' required disabled={disabledOccupation} onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} value={formData.occupation} placeholder='Enter your occupation' />
+                        <input type="text" name='occupation' ref={occupationRef} id='occupationfield' required disabled={disabledOccupation} onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} value={formData.occupation} placeholder='Enter your occupation' />
                         <button className='done-btn occupation-btn btn-hover' disabled={disabledOccupation}>
                           <p>done</p>
                         </button>
@@ -555,7 +598,7 @@ const Section1 = () => {
                     <div className='input-box'>
                       <p>What’s your Instagram handle?</p>
                       <div className='input-wrapper'>
-                        <input type="text" name='instagram' required disabled={disabledInstagram} onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} value={formData.instagram} placeholder='Enter your Instagram handle' />
+                        <input type="text" name='instagram' ref={instaRef} id='instagramfield' required disabled={disabledInstagram} onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} value={formData.instagram} placeholder='Enter your Instagram handle' />
                         <button className='done-btn instagram-btn btn-hover' disabled={disabledInstagram}>
                           <p>done</p>
                         </button>
@@ -564,13 +607,12 @@ const Section1 = () => {
                   </div>
                 </form>
               </div>
-              <form action="" autoComplete='off' onSubmit={handleCity} className='forms forms-light form6'>
+              <form action="" autoComplete='off'  onSubmit={handleCity} className='forms forms-light form6'>
                 <div className='input-container'>
                   <div className='input-box'>
                     <p>Where are you located?</p>
                     <div className='input-wrapper'>
-                      <input type="text" disabled={disabledCity} required placeholder='Enter your city' name='city' onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} value={formData.city
-
+                      <input type="text" ref={cityRef} disabled={disabledCity} required placeholder='Enter your city' name='city' id='cityfield' onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} value={formData.city
                       } />
                       <button className='done-btn city-btn btn-hover' disabled={disabledCity}>
                         <p>done</p>
@@ -635,14 +677,14 @@ const Section1 = () => {
                   <div className='input-box2'>
                     <p>What excites you the most when it comes to weddings?</p>
                     <div className='input-wrapper btn-wrap-mobile'>
-                      <button className='done-btn interest-btn btn-hover option-btn ' onClick={() => handleInterestSelection("Wedding Wear Designers")} disabled={disabledInterest}>
-                        <p>Wedding Wear Designers</p>
+                      <button className='done-btn interest-btn btn-hover option-btn ' onClick={(e) => handleInterestSelection("Wedding Wear Designers",e)} disabled={disabledInterest}>
+                        <p>Wedding Wear Designers <i class="ri-checkbox-circle-fill checkbox"></i></p> 
                       </button>
-                      <button className='done-btn interest-btn btn-hover option-btn' onClick={() => handleInterestSelection("Fine Jewellery")} disabled={disabledInterest}>
-                        <p>Fine Jewellery</p>
+                      <button className='done-btn interest-btn btn-hover option-btn' onClick={(e) => handleInterestSelection("Fine Jewellery",e)} disabled={disabledInterest}>
+                        <p>Fine Jewellery <i class="ri-checkbox-circle-fill checkbox"></i></p>
                       </button>
-                      <button className='done-btn interest-btn btn-hover option-btn' onClick={() => handleInterestSelection("Trousseau & Wedding Services")} disabled={disabledInterest}>
-                        <p>Trousseau & Wedding Services</p>
+                      <button className='done-btn interest-btn btn-hover option-btn' onClick={(e) => handleInterestSelection("Trousseau & Wedding Services",e)} disabled={disabledInterest}>
+                        <p>Trousseau & Wedding Services <i class="ri-checkbox-circle-fill checkbox"></i></p>
                       </button>
                     </div>
                   </div>
@@ -653,14 +695,14 @@ const Section1 = () => {
                   <div className='input-box2'>
                     <p>What excites you the most when it comes to weddings?</p>
                     <div className='input-wrapper btn-wrap-mobile'>
-                      <button className='done-btn brand-btn btn-hover option-btn' onClick={() => handleBrandSelection("Brand 1")} disabled={disableBrand}>
-                        <p>Brand 1</p>
+                      <button className='done-btn brand-btn btn-hover option-btn' onClick={(e) => handleBrandSelection("Brand 1",e)} disabled={disableBrand}>
+                        <p>Brand 1 <i class="ri-checkbox-circle-fill checkbox"></i></p>
                       </button>
-                      <button className='done-btn brand-btn btn-hover option-btn' onClick={() => handleBrandSelection("Brand 2")} disabled={disableBrand}>
-                        <p>Brand 2</p>
+                      <button className='done-btn brand-btn btn-hover option-btn' onClick={(e) => handleBrandSelection("Brand 2",e)} disabled={disableBrand}>
+                        <p>Brand 2<i class="ri-checkbox-circle-fill checkbox"></i></p>
                       </button>
-                      <button className='done-btn brand-btn btn-hover option-btn' onClick={() => handleBrandSelection("Brand 3")} disabled={disableBrand}>
-                        <p>Brand 3</p>
+                      <button className='done-btn brand-btn btn-hover option-btn' onClick={(e) => handleBrandSelection("Brand 3",e)} disabled={disableBrand}>
+                        <p>Brand 3<i class="ri-checkbox-circle-fill checkbox"></i></p>
                       </button>
                     </div>
                   </div>

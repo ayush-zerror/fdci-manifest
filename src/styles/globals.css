@@ -98,11 +98,14 @@ body {
   margin: 0 auto;
 }
 .banner-btn-bottom {
-  background-color: #222222 !important;
+  background-color: #d1ab68 !important;
   margin-top: 2vw !important;
 }
-.banner-btn-bottom:hover h6 {
+.banner-btn-bottom h6 {
   color: #e4d5ba !important;
+}
+.banner-btn-bottom:hover h6 {
+  color: #222222 !important;
 }
 #banner-btn-cir {
   position: relative;
@@ -118,10 +121,11 @@ body {
   font-size: 12px;
 }
 .banner-btn-bottom #banner-btn-cir {
-  background-color: #d1ab68;
+  background-color: #222222;
+  color: #e4d5ba;
 }
 .banner-btn-bottom #banner-btn-cir::after {
-  background-color: #d1ab68;
+  background-color: #222222;
 }
 #icon-btn {
   overflow: hidden;
@@ -435,6 +439,7 @@ body {
 }
 
 .done-btn p {
+  position: relative;
   border: none;
   text-transform: uppercase;
   font-size: 10px;
@@ -467,10 +472,22 @@ body {
 
 .done-date-picker p{
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+
+
+.checkbox{
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  display: none;
 }
 
 .option-btn {
-  margin-right: 2vw;
+  margin-right: 1vw;
 }
 
 #home-section2 {
@@ -572,7 +589,7 @@ body {
     gap: 3vw;
     user-select: none;
     overflow-y: auto;
-    height: 70vh;
+    height: 75.5vh;
   }
   .form-container2 {
     gap: 3vw;
@@ -581,6 +598,11 @@ body {
   .data-picker-wrapper{
     display: flex;
     flex-direction: column !important;
+  }
+
+  .wedding-details{
+    flex-direction: column;
+    align-items: start;
   }
  
   .wedding-details-input{
@@ -593,7 +615,7 @@ body {
     border: none;
     text-transform: uppercase;
     font-size: 9px;
-    padding: 8px 15px;
+    padding: 8px 31px;
     font-weight: 500;
     white-space: nowrap;
   }
@@ -636,8 +658,8 @@ body {
     overflow-x: auto;
   }
   #banner-card-container {
-    padding: 33vw 4vw;
-    padding-top: 18vw;
+    padding: 45vw 4vw;
+    padding-top: 20vw;
   }
   .banner-card {
     width: 95%;
