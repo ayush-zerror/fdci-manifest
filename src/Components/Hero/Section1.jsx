@@ -269,10 +269,9 @@ const Section1 = () => {
         countR.textContent = Number(countR.textContent) - 1
         if (Number(countR.textContent) === 0) {
           clearInterval(interval);
-          countR.textContent = "Redirecting...";
           setTimeout(() => {
-            // window.location.reload()
-          }, 3000);
+            window.location.reload()
+          }, 2900);
         }
       }, 1000);
 
