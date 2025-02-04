@@ -100,7 +100,7 @@ body {
 }
 .banner-btn-bottom {
   background-color: #d1ab68 !important;
-  margin-top: 2vw !important;
+  margin-top: 3vw !important;
 }
 .banner-btn-bottom h6 {
   color: #e4d5ba !important;
@@ -498,6 +498,7 @@ body {
   width: 100%;
   min-height: 100vh;
   padding: 3vw;
+  padding-bottom: 10vw;
 }
 
 #home-section2 h2 {
@@ -628,6 +629,9 @@ body {
     left: 3.5vw;
     font-size: 18px;
   }
+  .banner-btn-bottom {
+    margin-top: 8vw !important;
+  }
   #count {
     position: absolute;
     right: 0;
@@ -643,7 +647,8 @@ body {
     gap: 3vw;
     user-select: none;
     overflow-y: auto;
-    height: 71vh;
+    height: 70vh;
+    padding-bottom: 15vw;
   }
   .form-container2 {
     gap: 3vw;
@@ -764,6 +769,7 @@ body {
     width: 100%;
     min-height: 100vh;
     padding: 5vw;
+    padding-bottom: 20vw;
   }
   #home-section2 h2 {
     font-size: 35px;

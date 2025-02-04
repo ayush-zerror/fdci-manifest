@@ -822,7 +822,7 @@ const Section1 = () => {
               </form>
             </div>
             <div className='submit-slide'>
-              <i class="ri-checkbox-circle-fill"></i>
+              <i className="ri-checkbox-circle-fill"></i>
               <h4>Thank you for showing interest</h4>
               <p>You will be redirected to the homepage in <span id='redirectCount'>5</span> seconds...</p>
             </div>
