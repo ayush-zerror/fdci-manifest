@@ -179,8 +179,7 @@ const Section1 = () => {
 
   const handleDetail = (e) => {
     e.preventDefault()
-
-    if (formData.weddingDetails.date.trim().length > 0 && formData.weddingDetails.venue.trim().length > 0) {
+    // if (formData.weddingDetails.date.trim().length > 0 && formData.weddingDetails.venue.trim().length > 0) {
       setDisabledDetails(true)
       document.querySelectorAll(".details-btn").forEach((b) => b.classList.remove("btn-hover"))
       gsap.to(".forms-pt22", {
@@ -190,7 +189,7 @@ const Section1 = () => {
           setDisabledInterest(false)
         }
       })
-    }
+    // }
   }
   const handleAnswer = () => {
     gsap.to(".wedding-answer", {
@@ -699,10 +698,10 @@ const Section1 = () => {
                         <p>Brand 1 <i class="ri-checkbox-circle-fill checkbox"></i></p>
                       </button>
                       <button className='done-btn brand-btn btn-hover option-btn' onClick={(e) => handleBrandSelection("Brand 2",e)} disabled={disableBrand}>
-                        <p>Brand 2<i class="ri-checkbox-circle-fill checkbox"></i></p>
+                        <p>Brand 2 <i class="ri-checkbox-circle-fill checkbox"></i></p>
                       </button>
                       <button className='done-btn brand-btn btn-hover option-btn' onClick={(e) => handleBrandSelection("Brand 3",e)} disabled={disableBrand}>
-                        <p>Brand 3<i class="ri-checkbox-circle-fill checkbox"></i></p>
+                        <p>Brand 3 <i class="ri-checkbox-circle-fill checkbox"></i></p>
                       </button>
                     </div>
                   </div>

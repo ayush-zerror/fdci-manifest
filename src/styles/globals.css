@@ -443,8 +443,12 @@ body {
   border: none;
   text-transform: uppercase;
   font-size: 10px;
-  padding: 8px 35px;
+  padding: 0 30px;
+  height: 35px;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  transition: all ease .2s;
 }
 .wedding-answer{
   display: flex;
@@ -478,11 +482,10 @@ body {
 
 
 .checkbox{
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 16px;
+  font-size: 18px;
+  margin-left: 10px;
+  margin-right: -10px;
+  transition: all ease .3s;
   display: none;
 }
 
@@ -589,7 +592,7 @@ body {
     gap: 3vw;
     user-select: none;
     overflow-y: auto;
-    height: 75.5vh;
+    height: 73vh;
   }
   .form-container2 {
     gap: 3vw;
@@ -615,7 +618,7 @@ body {
     border: none;
     text-transform: uppercase;
     font-size: 9px;
-    padding: 8px 31px;
+    padding: 8px 25px;
     font-weight: 500;
     white-space: nowrap;
   }
@@ -662,7 +665,7 @@ body {
     padding-top: 20vw;
   }
   .banner-card {
-    width: 95%;
+    width: 83%;
     flex-shrink: 0;
     border-radius: 10px;
     margin-right: 2vw;
