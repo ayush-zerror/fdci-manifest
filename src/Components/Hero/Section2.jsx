@@ -1,6 +1,16 @@
+import gsap from 'gsap'
+import ScrollToPlugin from 'gsap/dist/ScrollToPlugin'
 import React from 'react'
-
+gsap.registerPlugin(ScrollToPlugin)
 const Section2 = () => {
+
+  const handleRegister = ()=>{
+    gsap.to(window, {
+      scrollTo: 0,
+      duration: 1,
+    })
+  }
+
   return (
     <div id='home-section2'>
       <h2>FDCI Manifest Wedding Weekend</h2>
@@ -23,7 +33,7 @@ const Section2 = () => {
         <p>Avarna Jain, Chairperson of RPSG Lifestyle Media, added, “We are delighted to launch our first homegrown brand at this exclusive event in association with the Fashion Design Council of India. The FDCI Manifest Wedding Weekend will not just bring together India’s top couturiers and the most celebrated jewellers for a bespoke two-day showcase but it will also set the trends for the season. Soon to be brides and grooms, and their families, painstakingly curated by our audience development teams, will be able to interact with India’s best couturiers and jewellers. This sets the tone for our couture, luxury and wedding initiative, that will reinvent the way young India looks at celebration and joy.”</p>
         <p>The Fashion Design Council of India (FDCI) is the country’s premiere representational body of fashion professionals, which encourages Indian artisans and helps develop young talent.</p><p>RPSG Lifestyle Media is a part of the USD 7-billion RP-Sanjiv Goenka Group with interests in power, carbon black, IT, retail, FMCG, sports and entertainment.</p>
       </div>
-      <div id='banner-btn' className='banner-btn-bottom'>
+      <div id='banner-btn' onClick={handleRegister} className='banner-btn-bottom'>
         <h6>Register now</h6>
         <span id='banner-btn-cir'>
           <span id='icon-btn'><i className="ri-arrow-right-up-line"></i></span>
