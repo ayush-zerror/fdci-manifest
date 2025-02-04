@@ -592,7 +592,7 @@ body {
     gap: 3vw;
     user-select: none;
     overflow-y: auto;
-    height: 73vh;
+    height: 71vh;
   }
   .form-container2 {
     gap: 3vw;
@@ -618,7 +618,7 @@ body {
     border: none;
     text-transform: uppercase;
     font-size: 9px;
-    padding: 8px 25px;
+    padding: 8px 20px;
     font-weight: 500;
     white-space: nowrap;
   }
