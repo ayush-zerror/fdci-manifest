@@ -307,7 +307,6 @@ const Section1 = () => {
 
   }
 
-
   const handleInfoHover = (e) => {
     document.querySelector("#info-container").style.color = "#e4d5ba";
     document.querySelector("#info-container").style.backgroundColor = "#393939";
@@ -564,27 +563,51 @@ const Section1 = () => {
       e.innerHTML = clutter
     })
 
-    var ps = document.querySelectorAll(".anime")
-    var index = 0
-    gsap.to(ps[index].querySelectorAll("span"), {
-      y: "-100%",
-      duration: 1,
-      stagger: {
-        amount: .3
-      },
-      delay: 10,
-      onComplete: function () {
-        gsap.set(ps[index].querySelectorAll("span"), { y: "100%" })
-      }
-    })
-    gsap.to(".pbtm span", {
-      y: "-100%",
-      duration: 1,
-      stagger: {
-        amount: .3
-      },
-      delay: 10
-    })
+   setTimeout(() => {
+    setInterval(() => {
+      gsap.fromTo(".ptop span",{
+        y:"-11%",
+      },{
+        y:"-100%",
+        duration: 1,
+        stagger: {
+          amount: .4
+        },
+      })
+      gsap.fromTo(".pbtm span",{
+        y:"-11%",
+      },{
+        y:"-100%",
+        duration: 1,
+        stagger: {
+          amount: .4
+        },
+      })
+    }, 3000);
+   }, 2000);
+
+
+    // var ps = document.querySelectorAll(".anime")
+    // var index = 0
+    // gsap.to(ps[index].querySelectorAll("span"), {
+    //   y: "-100%",
+    //   duration: 1,
+    //   stagger: {
+    //     amount: .3
+    //   },
+    //   delay: 10,
+    //   onComplete: function () {
+    //     gsap.set(ps[index].querySelectorAll("span"), { y: "100%" })
+    //   }
+    // })
+    // gsap.to(".pbtm span", {
+    //   y: "-100%",
+    //   duration: 1,
+    //   stagger: {
+    //     amount: .3
+    //   },
+    //   delay: 10
+    // })
   }, [])
 
   return (
