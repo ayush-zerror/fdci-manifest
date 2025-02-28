@@ -1,7 +1,7 @@
 import gsap from 'gsap';
 import React, { useEffect, useRef, useState } from 'react'
 
-const Section1 = () => {
+const Section1 = ({ registerBtn }) => {
 
   const [disabledName, setDisabledName] = useState(false)
   const [disabledEmail, setDisabledEmail] = useState(true)
@@ -278,7 +278,7 @@ const Section1 = () => {
 
   const handleInfoHover = (e) => {
     document.querySelector("#info-container").style.color = "#e4d5ba";
-    document.querySelector("#info-container").style.backgroundColor = "#393939";
+    document.querySelector("#info-container").style.backgroundColor = "#722c7338";
   }
   const handleInfoLeave = (e) => {
     document.querySelector("#info-container").style.color = "transparent";
@@ -502,15 +502,15 @@ const Section1 = () => {
         duration: .8,
         delay: .2
       })
-      .to(".home-section1", {
-        padding: "1vw",
-        duration: .5,
-      }, "s")
-      .to(".hero-banner", {
-        borderRadius: "20px",
-        opacity: 1,
-        duration: .5,
-      }, "s")
+      // .to(".home-section1", {
+      //   padding: "1vw",
+      //   duration: .5,
+      // }, "s")
+      // .to(".hero-banner", {
+      //   borderRadius: "20px",
+      //   opacity: 1,
+      //   duration: .5,
+      // }, "s")
       .to(".corner,#banner-content,#info-container", {
         opacity: 1,
         duration: .5
@@ -585,9 +585,17 @@ const Section1 = () => {
         <span id='back-btn' onClick={(e) => handleBack(e)}><i data-slide="1" id='back-slide' className="ri-arrow-left-line"></i></span>
         <div id='banner-content'>
           <img src="/images/fdci.png" alt="" />
-          <p>Is back with another edition
-            and it's bigger than ever.</p>
-          <div onClick={handleClick} id='banner-btn'>
+          <div className='banner-text'>
+          <h2>Is back with another edition
+            and it's bigger than ever.</h2>
+          <p>MARK YOUR CALENDARS TO
+            EXPERIENCE THE <br /> ULTIMATE IN 
+            WEDDING LUXURY!</p>
+            <div id="line"></div>
+          <p>2nd — 3rd August, 2025 <br />
+            Taj Palace, New Delhi</p>
+          </div>
+          <div ref={registerBtn} onClick={handleClick} id='banner-btn'>
             <h6>Register now</h6>
             <span id='banner-btn-cir'>
               <span id='icon-btn'><i className="ri-arrow-right-up-line"></i></span>
@@ -805,15 +813,15 @@ const Section1 = () => {
                     <p>What excites you the most when it comes to weddings?</p>
                     <div className='input-wrapper btn-wrap-main'>
                       <div className='btn-wrap-mobile'>
-                      <button className='done-btn brand-btn btn-hover option-btn' onClick={(e) => handleBrandSelection("Brand 1", e)} disabled={disableBrand}>
-                        <p>Brand 1 <i className="ri-checkbox-circle-fill checkbox"></i></p>
-                      </button>
-                      <button className='done-btn brand-btn btn-hover option-btn' onClick={(e) => handleBrandSelection("Brand 2", e)} disabled={disableBrand}>
-                        <p>Brand 2 <i className="ri-checkbox-circle-fill checkbox"></i></p>
-                      </button>
-                      <button className='done-btn brand-btn btn-hover option-btn' onClick={(e) => handleBrandSelection("Brand 3", e)} disabled={disableBrand}>
-                        <p>Brand 3<i className="ri-checkbox-circle-fill checkbox"></i></p>
-                      </button>
+                        <button className='done-btn brand-btn btn-hover option-btn' onClick={(e) => handleBrandSelection("Brand 1", e)} disabled={disableBrand}>
+                          <p>Brand 1 <i className="ri-checkbox-circle-fill checkbox"></i></p>
+                        </button>
+                        <button className='done-btn brand-btn btn-hover option-btn' onClick={(e) => handleBrandSelection("Brand 2", e)} disabled={disableBrand}>
+                          <p>Brand 2 <i className="ri-checkbox-circle-fill checkbox"></i></p>
+                        </button>
+                        <button className='done-btn brand-btn btn-hover option-btn' onClick={(e) => handleBrandSelection("Brand 3", e)} disabled={disableBrand}>
+                          <p>Brand 3<i className="ri-checkbox-circle-fill checkbox"></i></p>
+                        </button>
                       </div>
                       <button className='done-btn brand-btn btn-hover' disabled={disableBrand} >
                         <p>done</p>
