@@ -1,4 +1,5 @@
 import gsap from 'gsap';
+import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react'
 
 const Section1 = ({ registerBtn }) => {
@@ -584,13 +585,10 @@ const Section1 = ({ registerBtn }) => {
       <div className="hero-banner">
         <span id='back-btn' onClick={(e) => handleBack(e)}><i data-slide="1" id='back-slide' className="ri-arrow-left-line"></i></span>
         <div id='banner-content'>
-          <img src="/images/fdci.png" alt="" />
+          <Image width={1000} height={1000} id='logo-main' src="/images/fdci.png" alt="" />
           <div className='banner-text'>
-          <h2>Is back with another edition
-            and it's bigger than ever.</h2>
-          <p>MARK YOUR CALENDARS TO
-            EXPERIENCE THE <br /> ULTIMATE IN 
-            WEDDING LUXURY!</p>
+          <p>Is back with another edition <br />
+          and it's bigger than ever.</p>
             <div id="line"></div>
           <p>2nd — 3rd August, 2025 <br />
             Taj Palace, New Delhi</p>

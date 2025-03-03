@@ -2,6 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 
+@font-face {
+  font-family: "NeueHaasDisplayBold";
+  src: url(../../public/Assets/NeueHaasDisplayBold.ttf);
+} */
+/* @font-face {
+  font-family: "NeueHaasDisplayBoldItalic";
+  src: url(../../public/Assets/NeueHaasDisplayBoldItalic.ttf);
+} */
+/* @font-face {
+  font-family: "NeueHaasMedium";
+  src: url(../../public/Assets/NeueHaasDisplayMediu.ttf);
+}
+@font-face {
+  font-family: "NeueHaasDisplayLight";
+  src: url(../../public/Assets/NeueHaasDisplayLight.ttf);
+} */
+
+:root {
+  --primary-font-Neue: "neulis-neue", sans-serif;
+  --primary-font-scotch-display: "scotch-display-condensed", sans-serif;
+  --primary-font-scotch-display-compress: "scotch-display-compressed", sans-serif;
+  /* --primary-font-scotch-display-normal: "scotch-display", sans-serif; */
+  --primary-font-Neue-Bold: "NeueHaasDisplayBold";
+  --primary-font-Neue-Medium: "NeueHaasMedium";
+  --primary-font-Neue-MediumItalic: "NeueHaasDisplayMediumItalic";
+  --primary-font-Neue-Light: "NeueHaasDisplayLight";
+  --secondary-font-Bitter: "Bitter-VariableFont";
+}
+
+
 * {
   margin: 0;
   padding: 0;
@@ -18,7 +49,8 @@ body {
 }
 
 .home-wrapper-main {
-  background: linear-gradient(-45deg, rgba(72, 28, 73, 0.3), rgba(211, 169, 102, 0.74)) 90%, url('/images/noise.png');
+  background-color: #eac8d9;
+  /* background: linear-gradient(-45deg, rgba(72, 28, 73, 0.3), rgba(211, 169, 102, 0.74)) 90%, url('/images/noise.png'); */
 }
 
 .home-section1 {
@@ -30,7 +62,7 @@ body {
   width: 100%;
   height: 100%;
   /* background-color: #333333; */
-  background-color:#481C49;
+  background-color: #481c49;
   /* border-radius: 20px; */
   display: flex;
   align-items: center;
@@ -61,12 +93,14 @@ body {
   right: 0%;
   bottom: 0%;
   width: 25%;
+  filter: contrast(100%);
 }
 #corner2 {
   position: absolute;
   left: 0%;
   top: 0%;
   width: 20%;
+  filter: contrast(100%);
 }
 #banner-content {
   display: flex;
@@ -75,17 +109,20 @@ body {
   flex-direction: column;
   opacity: 0;
   height: 100%;
+  width: 100%;
   position: relative;
 }
-.hero-banner img {
-  width: 30%;
-  color: #d1ab68;
+#logo-main {
+  width: 35%;
+  object-fit: cover;
 }
 #banner-content p {
   font-size: 15px;
-  color: #d3aa66;
+  /* color: #EAC8D9; */
+  color: #d1ab68;
   margin: 25px 0;
   text-transform: uppercase;
+  font-family: var(--primary-font-Neue);
 }
 .banner-text {
   text-align: center;
@@ -96,20 +133,17 @@ body {
   flex-direction: column;
   align-items: center;
 }
-#line{
+#line {
   height: 50px;
   width: 1px;
   background-color: #d1ab68;
 }
-.banner-text h2{
-  font-size: 25px;
-  margin-bottom: 30px;
-}
-.banner-text p{
-  font-size: 18px !important;
+
+.banner-text p {
+  font-size: 16px !important;
   margin: 10px 0 !important;
 }
-#banner-content #banner-btn{
+#banner-content #banner-btn {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -198,6 +232,8 @@ body {
   font-size: 11px;
   position: relative;
   z-index: 5;
+  font-family: var(--primary-font-Neue);
+  line-height: 1;
 }
 #banner-btm {
   width: 100%;
@@ -247,6 +283,7 @@ body {
   letter-spacing: 0.5px;
   transition: all ease 0.1s;
   cursor: default;
+  font-family: var(--primary-font-Neue);
 }
 #banner-btm > p {
   font-size: 11px;
@@ -273,13 +310,13 @@ body {
 #que1 {
   color: #e4d5bae4;
   font-size: 15px;
+  font-family: var(--primary-font-Neue);
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   opacity: 0;
   position: relative;
-  font-weight: 500;
 }
 #question2 {
   position: absolute;
@@ -306,6 +343,7 @@ body {
   margin-top: 2px;
   opacity: 0;
   display: none;
+  font-family: var(--primary-font-Neue);
 }
 .banner-card {
   position: relative;
@@ -359,6 +397,7 @@ body {
   padding: 0.7vw 1.5vw;
   border-bottom: 1px solid #33333354;
   width: 100%;
+  font-family: var(--primary-font-Neue);
 }
 .banner-card h3 {
   color: #333333;
@@ -366,6 +405,7 @@ body {
   padding: 1.5vw;
   line-height: 1.2;
   border-bottom: 1px solid #333333;
+  font-family: var(--primary-font-Neue);
 }
 
 .form-container {
@@ -378,15 +418,15 @@ body {
   flex-direction: column;
   gap: 1vw;
 }
-.input-half{
+.input-half {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.input-half form{
-  width: calc(50% - .5vw);
+.input-half form {
+  width: calc(50% - 0.5vw);
 }
 
 .form-container2 {
@@ -426,12 +466,15 @@ body {
   color: #333333;
   padding: 0.7vw 1.5vw;
   border-bottom: 1px solid #33333352;
+  font-family: var(--primary-font-Neue);
 }
 .input-box2 > p {
   font-size: 13px;
   color: #333333;
   padding: 0.7vw 1.5vw;
   border-bottom: 1px solid #33333352;
+  font-family: var(--primary-font-Neue);
+
 }
 .input-wrapper {
   padding: 1.2vw 1.5vw;
@@ -450,6 +493,7 @@ body {
   background-color: transparent;
   border: none;
   outline: none;
+  font-family: var(--primary-font-Neue);
 }
 .input-wrapper input::placeholder {
   color: #222222a0;
@@ -479,25 +523,26 @@ body {
   font-weight: 500;
   display: flex;
   align-items: center;
-  transition: all ease .2s;
+  transition: all ease 0.2s;
+  font-family: var(--primary-font-Neue);
 }
-.wedding-answer{
+.wedding-answer {
   display: flex;
   align-items: center;
 }
-.wedding-details-input{
+.wedding-details-input {
   display: flex;
   align-items: center;
   gap: 2vw;
 }
-.wedding-details{
+.wedding-details {
   width: 100%;
   display: none;
   align-items: center;
   justify-content: space-between;
   opacity: 0;
 }
-.done-date-picker{
+.done-date-picker {
   display: flex;
   align-items: center;
   font-size: 13px;
@@ -505,23 +550,23 @@ body {
   color: #333333;
 }
 
-.done-date-picker p{
+.done-date-picker p {
   white-space: nowrap;
   display: flex;
   align-items: center;
 }
 
-.btn-wrap-main{
+.btn-wrap-main {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.checkbox{
+.checkbox {
   font-size: 18px;
   margin-left: 10px;
   margin-right: -10px;
-  transition: all ease .3s;
+  transition: all ease 0.3s;
   display: none;
 }
 
@@ -537,9 +582,10 @@ body {
 }
 
 #home-section2 h2 {
-  font-size: 35px;
-  font-weight: 600;
+  font-size: 50px;
+  font-weight: 500;
   text-align: center;
+  font-family: var(--primary-font-scotch-display-compress);
 }
 
 #date-container {
@@ -554,15 +600,17 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 17px;
+  font-size: 20px;
 }
 
 .text-wrap-d p {
-  opacity: 0.6;
+  opacity: 0.8;
+  font-weight: 500;
+  font-family: var(--primary-font-Neue-Bold);
 }
 
 #about-text-container {
-  width: 65%;
+  width: 60%;
   display: flex;
   flex-direction: column;
   gap: 25px;
@@ -570,11 +618,12 @@ body {
   text-align: center;
 }
 
-#about-text-container p{
-  font-size: 1.5vw;
+#about-text-container p {
+  font-size: 1.3vw;
+  font-family: var(--primary-font-Neue);
 }
 
-#scrollformore{
+#scrollformore {
   position: absolute;
   bottom: 3%;
   left: 50%;
@@ -582,20 +631,21 @@ body {
   height: 20px;
   overflow: hidden;
 }
-#scrollformore p{
+#scrollformore p {
   padding: 0;
   margin: 0;
   color: #d1ab68;
+  font-family: var(--primary-font-Neue);
 }
-.pbtm{
+.pbtm {
   position: absolute;
   top: 100%;
 }
-#scrollformore p span{
+#scrollformore p span {
   display: inline-block;
 }
 
-.submit-slide{
+.submit-slide {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -607,124 +657,179 @@ body {
   display: none;
 }
 
-.submit-slide i{
+.submit-slide i {
   font-size: 50px;
   color: #d1ab68;
 }
-.submit-slide h4{
+.submit-slide h4 {
   color: #e4d5ba;
   font-size: 1.5vw;
 }
-.submit-slide p{
+.submit-slide p {
   color: #e4d5ba6c;
 }
 
-
-.home-section3{
+.home-section3 {
   width: 100%;
   min-height: 100vh;
   padding: 50px;
 }
 .home-section3 h3 {
   margin-left: 50px;
-  font-size: 35px;
-  font-weight: 600;
+  font-size: 50px;
+  font-weight: 500;
   text-align: center;
   margin-bottom: 40px;
+  font-family: var(--primary-font-scotch-display-compress);
 }
 
-.home-section3 .video-container{
+.home-section3 .video-container {
   width: 100%;
   height: 100vh;
 }
-.home-section3 .video-container video{
+.home-section3 .video-container video {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: scale(.7);
+  transform: scale(0.7);
   transform-origin: top center;
 }
 
-.heighlight{
+.heighlight {
   width: 100%;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   padding: 60px 0;
 }
-.heighlight div{
+.heighlight >div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  width: calc(100%/5);
+  width: calc(100% / 5);
 }
-
-.heighlight span{
-  font-size: 4vw;
+.hl-count {
+  display: flex;
+  align-items: center;
+}
+.plus {
+  font-size: 5.5vw;
   font-weight: 700;
 }
-.heighlight p{
+
+.heighlight span {
+  font-size: 6vw;
+  font-weight: 500;
+  font-family: var(--primary-font-scotch-display-compress);
+  white-space: nowrap;
+}
+.heighlight p {
   font-size: 1.2vw;
+  width: 60%;
+  text-align: center;
+  margin: 0 auto;
+  font-family: var(--primary-font-Neue);
 }
 
-
-.home-section4{
+.home-section4 {
   width: 100%;
   padding: 50px 0;
 }
 .home-section4 h3 {
   /* margin-left: 50px; */
-  font-size: 35px;
-  font-weight: 600;
+  font-size: 50px;
+  font-weight: 500;
   text-align: center;
   margin-bottom: 40px;
+  font-family: var(--primary-font-scotch-display-compress);
 }
 
-.swiper-container{
+.swiper-container {
   width: 100%;
   height: 75vh;
   overflow: hidden;
 }
 
-.swiper-scroll{
+.swiper-scroll {
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   gap: 30px;
-  padding:0 50px;
+  padding: 0 50px;
   transition: transform 0.5s ease-in-out;
 }
-.swiper-showcase{
+.swiper-showcase {
   flex-shrink: 0;
 }
-.swiper-showcase img{
+.swiper-showcase img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-.swiper-showcase.large{
+.swiper-showcase.large {
   width: 60vw;
   height: 100%;
 }
-.swiper-showcase.small{
+.swiper-showcase.small {
   width: 25vw;
   height: 100%;
 }
-.controller-swiper{
+.controller-swiper {
   display: flex;
   align-items: center;
   margin-left: 50px;
   padding: 20px 0;
   gap: 20px;
 }
-.swiper-btns{
+.swiper-btns {
   display: flex;
   align-items: center;
   gap: 30px;
 }
-#swiper-counter{
-  font-size: 1.5vw;
+#swiper-counter {
+  font-size: 1.6vw;
+  letter-spacing: 2px;
+  font-family: var(--primary-font-scotch-display-compress);
 }
 
+.footer-fd {
+  width: 100%;
+  background-color: #481c49;
+  padding:20px 50px;
+  color: #d1ab68;
+  font-family: var(--primary-font-Neue);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.footer-fd  > span{
+  font-size: 50px;
+  font-family: var(--primary-font-scotch-display-compress);
+  text-transform: capitalize;
+  font-weight: 500;
+  margin: 20px;
+}
+.footer-btm{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #d1ab68;
+  padding-top: 20px;
+}
+
+.footer-btm div{
+  display: flex;
+  align-items: flex-end;
+  gap: 30px;
+  text-transform: uppercase;
+  font-size: 16px;
+}
+.footer-btm span{
+  font-size: 13px;
+}
 @media (max-width: 400px) {
   .home-section1 {
     height: 100svh;
@@ -734,8 +839,8 @@ body {
     padding: 0 !important;
     margin: 0 !important;
     width: 100% !important;
-}
-  .hero-banner{
+  }
+  .hero-banner {
     border-radius: 0 !important;
   }
   .input-half {
@@ -743,7 +848,7 @@ body {
     align-items: center;
     gap: 3vw;
   }
-  .input-half form{
+  .input-half form {
     width: 100%;
   }
   #corner2 {
@@ -799,17 +904,17 @@ body {
     gap: 3vw;
     user-select: none;
   }
-  .data-picker-wrapper{
+  .data-picker-wrapper {
     display: flex;
     flex-direction: column !important;
   }
 
-  .wedding-details{
+  .wedding-details {
     flex-direction: column;
     align-items: start;
   }
- 
-  .wedding-details-input{
+
+  .wedding-details-input {
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -846,7 +951,7 @@ body {
     width: 100%;
   }
 
-  #dateInput{
+  #dateInput {
     display: flex;
     width: 100%;
   }
@@ -861,7 +966,7 @@ body {
     justify-content: space-between;
     overflow-x: auto;
   }
-  .btn-wrap-main{
+  .btn-wrap-main {
     display: flex;
     align-items: end;
   }
@@ -941,17 +1046,11 @@ body {
   .submit-slide h4 {
     color: #e4d5ba;
     font-size: 4.5vw;
+  }
+  .submit-slide p {
+    color: #e4d5ba6c;
+    text-align: center;
+    font-size: 13px;
+    width: 70%;
+  }
 }
-.submit-slide p {
-  color: #e4d5ba6c;
-  text-align: center;
-  font-size: 13px;
-  width: 70%;
-}
-}
-
-
-
-
-
-

@@ -21,8 +21,8 @@ const Section3 = () => {
         highlightItems.forEach((item) => {
             let finalValue = parseInt(item.textContent.replace(/\D/g, "")); // Extract numbers
             gsap.fromTo(
-                item, 
-                { innerText: 0 }, 
+                item,
+                { innerText: 0 },
                 {
                     innerText: finalValue,
                     duration: 2,
@@ -50,6 +50,10 @@ const Section3 = () => {
             </div>
             <div className='heighlight'>
                 <div>
+                    <span>6</span>
+                    <p>Gifting & Wedding Planning brands</p>
+                </div>
+                <div>
                     <span>19</span>
                     <p>Designers</p>
                 </div>
@@ -58,15 +62,13 @@ const Section3 = () => {
                     <p>Jewellers</p>
                 </div>
                 <div>
-                    <span>6</span>
-                    <p>Gifting & Wedding Planning brands</p>
-                </div>
-                <div>
                     <span>5</span>
                     <p>Masterclasses by Industry experts</p>
                 </div>
                 <div>
-                    <span>1500+</span>
+                    <div className='hl-count'>
+                        <span>1500</span><div className='plus'>+</div>
+                    </div>
                     <p>HNI families in attendance</p>
                 </div>
             </div>

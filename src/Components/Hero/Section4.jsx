@@ -42,26 +42,35 @@ const Section4 = () => {
 
     return (
         <div className="home-section4">
-            <h3>FDCI Manifest Wedding Weekend – Previous Year Gallery</h3>
+            <h3>Glimpses from the Previous Year</h3>
             <div className="swiper-container">
                 <div className="swiper-scroll" ref={swiperRef}>
                 <div className="swiper-showcase large">
-                        <Image width={1000} height={10000} src="/gallery/0237-Manifest Launch Party.jpg" alt="image" />
+                        <Image width={1000} height={1000} src="/gallery/0237-Manifest Launch Party.jpg" alt="image" />
                     </div>
                     <div className="swiper-showcase small">
-                        <Image width={1000} height={10000} src="/gallery/0208-Manifest Launch Party.jpg" alt="image" />
+                        <Image width={1000} height={1000} src="/gallery/0208-Manifest Launch Party.jpg" alt="image" />
                     </div>
                     <div className="swiper-showcase large">
-                        <Image width={1000} height={10000} src="/gallery/0014-FDCI+Manifest Wedding Weekend-(Day-1).jpg" alt="image" />
+                        <Image width={1000} height={1000} src="/gallery/0014-FDCI+Manifest Wedding Weekend-(Day-1).jpg" alt="image" />
                     </div>
                     <div className="swiper-showcase large">
-                        <Image width={1000} height={10000} src="/gallery/0164-FDCI+Manifest Wedding Weekend-(Day-1).jpg" alt="image" />
+                        <Image width={1000} height={1000} src="/gallery/0164-FDCI+Manifest Wedding Weekend-(Day-1).jpg" alt="image" />
                     </div>
                     <div className="swiper-showcase large">
-                        <Image width={1000} height={10000} src="/gallery/0192-FDCI+Manifest Wedding Weekend-(Day-1).jpg" alt="image" />
+                        <Image width={1000} height={1000} src="/gallery/0192-FDCI+Manifest Wedding Weekend-(Day-1).jpg" alt="image" />
                     </div>
                     <div className="swiper-showcase large">
-                        <Image width={1000} height={10000} src="/gallery/0001-FDCI+Manifest Wedding Weekend-(Day-1).jpg" alt="image" />
+                        <Image width={1000} height={1000} src="/gallery/1515-Manifest Wedding Weekend-(Day-2).jpg" alt="image" />
+                    </div>
+                    <div className="swiper-showcase large">
+                        <Image width={1000} height={1000} src="/gallery/Designer Falguni and Shane Peacock with Avarna Jain and Sara Tendulkar 2.jpg" alt="image" />
+                    </div>
+                    <div className="swiper-showcase large">
+                        <Image width={1000} height={1000} src="/gallery/0264-Manifest Launch Party.jpg" alt="image" />
+                    </div>
+                    <div className="swiper-showcase large">
+                        <Image width={1000} height={1000} src="/gallery/Designer Rohit Gandhi with models 2.jpg" alt="image" />
                     </div>
                 </div>
             </div>
@@ -86,7 +95,7 @@ const Section4 = () => {
                         </svg>
                     </button>
                 </div>
-                <span id="swiper-counter">({String(currentIndex + 1).padStart(2, "0")})/(06)</span>
+                <span id="swiper-counter">({String(currentIndex + 1).padStart(2, "0")})/(09)</span>
             </div>
         </div>
     );
