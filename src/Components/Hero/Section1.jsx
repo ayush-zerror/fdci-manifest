@@ -279,9 +279,6 @@ const Section1 = ({ registerBtn }) => {
         .to(".input-box,#question2,#subtitle", {
           opacity: 0,
           duration: .5,
-          onComplete: () => {
-            document.querySelector("#subtitle").style.display = "none"
-          }
         })
         .to(".forms", {
           opacity: 0,
@@ -300,6 +297,7 @@ const Section1 = ({ registerBtn }) => {
           onComplete: () => {
             document.querySelector("#back-btn").style.display = "none"
             document.querySelector("#banner-card-container").style.display = "none"
+            document.querySelector("#subtitle").style.display = "none"
           }
         })
         .to("#banner-content", {
@@ -312,7 +310,7 @@ const Section1 = ({ registerBtn }) => {
           duration: .5
         }, "a")
     }
- 
+
   }
   //card click animation
   // useEffect(() => {
