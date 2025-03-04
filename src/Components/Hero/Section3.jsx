@@ -29,7 +29,7 @@ const Section3 = ({vidRef}) => {
                     ease: "power2.out",
                     scrollTrigger: {
                         trigger: ".heighlight",
-                        start: "top 80%",
+                        start: "top 90%",
                         toggleActions: "play none none reset"
                     },
                     snap: { innerText: 1 }, // Ensures numbers are whole

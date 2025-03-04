@@ -7,34 +7,25 @@ const Section1 = ({ registerBtn }) => {
   const [disabledName, setDisabledName] = useState(false)
   const [disabledEmail, setDisabledEmail] = useState(true)
   const [disabledcontact, setDisabledcontact] = useState(true)
-  const [disabledCity, setDisabledCity] = useState(true)
-  const [disabledOccupation, setDisabledOccupation] = useState(true)
+  const [disabledPin, setDisabledPin] = useState(true)
   const [disabledInstagram, setDisabledInstagram] = useState(true)
-  const [disabledDetails, setDisabledDetails] = useState(false)
-  const [disabledInterest, setDisabledInterest] = useState(true)
-  const [disableBrand, setDisabledBrand] = useState(true)
   const [disableCategory, setDisabledCategory] = useState(true)
+  const [disableTime, setDisabledTime] = useState(true)
   const [formData, setFormData] = useState({
-    category: '',
     name: '',
+    category: '',
     contact: '',
     email: '',
-    city: '',
-    occupation: "",
+    pin: "",
     instagram: "",
-    weddingDetails: {
-      date: "",
-      venue: "",
-    },
-    interestedIn: [],
-    brand: [],
+    slot: "",
   })
 
 
   const nameRef = useRef(null);
   const contactRef = useRef(null);
   const emailRef = useRef(null);
-  const occupationRef = useRef(null);
+  const pinRef = useRef(null);
   const instaRef = useRef(null);
   const cityRef = useRef(null);
 
@@ -90,10 +81,10 @@ const Section1 = ({ registerBtn }) => {
         opacity: 1,
         duration: 1,
         onComplete: () => {
-          setDisabledOccupation(false)
+          setDisabledPin(false)
           setTimeout(() => {
-            if (occupationRef.current) {
-              occupationRef.current.focus();
+            if (pinRef.current) {
+              pinRef.current.focus();
             }
           }, 500);
         }
@@ -101,12 +92,12 @@ const Section1 = ({ registerBtn }) => {
     }
 
   }
-  const handleOccupation = (e) => {
+  const handlePin = (e) => {
     e.preventDefault()
-    if (formData.occupation.trim().length > 0) {
-      occupationRef.current.blur()
-      setDisabledOccupation(true)
-      document.querySelector(".occupation-btn").classList.remove("btn-hover")
+    if (formData.pin.trim().length > 0) {
+      pinRef.current.blur()
+      setDisabledPin(true)
+      document.querySelector(".pin-btn").classList.remove("btn-hover")
       gsap.to(".form5", {
         opacity: 1,
         duration: .5,
@@ -145,11 +136,28 @@ const Section1 = ({ registerBtn }) => {
 
     e.preventDefault()
     setFormData({ ...formData, category: category })
+    setDisabledCategory(true)
     e.target.querySelector(".checkbox").style.display = "block"
     document.querySelectorAll(".cat-btn").forEach((b) => {
       b.classList.remove("btn-hover")
     })
-    setDisabledCategory(true)
+    gsap.to(".form7", {
+      opacity: 1,
+      duration: 1,
+      onComplete: () => {
+        setDisabledTime(false)
+      }
+    })
+  }
+
+  const handleTime = (slot, e) => {
+    e.preventDefault()
+    setFormData({ ...formData, slot: slot })
+    e.target.querySelector(".checkbox").style.display = "block"
+    document.querySelectorAll(".time-btn").forEach((b) => {
+      b.classList.remove("btn-hover")
+    })
+    setDisabledTime(true)
 
     var tl = gsap.timeline()
       .to(".form-container", {
@@ -159,7 +167,7 @@ const Section1 = ({ registerBtn }) => {
           document.querySelector(".form-container").style.display = "none"
         }
       }, "a")
-      .to("#que1,#subtitle,#back-btn", {
+      .to("#que1,#back-btn", {
         opacity: 0,
         duration: .5,
       }, "a")
@@ -215,14 +223,14 @@ const Section1 = ({ registerBtn }) => {
       }, "a")
       .to("#que1,#back-btn", {
         onStart: function () {
-          document.querySelector("#subtitle").style.display = "block"
+          // document.querySelector("#subtitle").style.display = "block"
           gsap.set("#banner-card-container", { display: "flex" })
         },
         opacity: 1,
         duration: 1,
-        onComplete: () => {
-          document.querySelector("#subtitle").style.display = "block"
-        }
+        // onComplete: () => {
+        //   document.querySelector("#subtitle").style.display = "block"
+        // }
       }, "b")
       .to(".forms", {
         onStart: () => {
@@ -236,7 +244,7 @@ const Section1 = ({ registerBtn }) => {
         duration: 1,
         delay: .3
       }, "b")
-      .to(".input-box,#question2,#subtitle", {
+      .to(".input-box,#question2", {
         opacity: 1,
         duration: .5
       })
@@ -255,28 +263,20 @@ const Section1 = ({ registerBtn }) => {
       setDisabledName(false)
       setDisabledEmail(true)
       setDisabledcontact(true)
-      setDisabledOccupation(true)
+      setDisabledPin(true)
       setDisabledInstagram(true)
-      setDisabledCity(true)
       setFormData({
         category: '',
         name: '',
         contact: '',
         email: '',
-        city: '',
-        occupation: "",
+        pin: "",
         instagram: "",
-        weddingDetails: {
-          date: "",
-          venue: "",
-        },
-        interestedIn: [],
-        brand: [],
       })
 
       var tl = gsap.timeline()
       tl
-        .to(".input-box,#question2,#subtitle", {
+        .to(".input-box,#question2", {
           opacity: 0,
           duration: .5,
         })
@@ -297,7 +297,7 @@ const Section1 = ({ registerBtn }) => {
           onComplete: () => {
             document.querySelector("#back-btn").style.display = "none"
             document.querySelector("#banner-card-container").style.display = "none"
-            document.querySelector("#subtitle").style.display = "none"
+            // document.querySelector("#subtitle").style.display = "none"
           }
         })
         .to("#banner-content", {
@@ -305,72 +305,16 @@ const Section1 = ({ registerBtn }) => {
           opacity: 1,
           duration: .5
         }, "a")
-        .to(".corner", {
+        .to(".corner ,#banner-btm ,#scrollformore", {
           opacity: 1,
-          duration: .5
+          duration: .5,
+          onComplete: () => {
+            document.querySelector("#banner-btm").style.display = "flex"
+          }
         }, "a")
     }
 
   }
-  //card click animation
-  // useEffect(() => {
-  //   document.querySelectorAll(".banner-card").forEach(function (card) {
-  //     card.addEventListener("mouseenter", function () {
-  //       document.querySelectorAll(".banner-card").forEach(function (c) {
-  //         c.style.opacity = .5
-  //       })
-  //       card.style.opacity = 1
-  //     })
-  //     card.addEventListener("mouseleave", function () {
-  //       document.querySelectorAll(".banner-card").forEach(function (c) {
-  //         c.style.opacity = 1
-  //       })
-  //     })
-  //     card.addEventListener("click", function () {
-  //       document.querySelector(".step-count").textContent = "2"
-  //       document.querySelector("#back-slide").setAttribute("data-slide", "2")
-  //       var category = card.getAttribute("data-category")
-  //       setFormData({ ...formData, category: category })
-  //       var tl = gsap.timeline()
-  //       tl
-  //         .to("#cards", {
-  //           opacity: 0,
-  //           duration: .5
-  //         }, "a")
-  //         .to("#question1", {
-  //           opacity: 0,
-  //           duration: .5,
-  //           onComplete: () => {
-  //             document.querySelector("#subtitle").style.display = "block"
-  //           }
-  //         }, "a")
-  //         .to(".forms", {
-  //           onStart: () => {
-  //             document.querySelector(".form-container").style.display = "flex"
-  //           },
-  //           opacity: 1,
-  //           transform: "translateY(0%)",
-  //           stagger: {
-  //             amount: .4,
-  //           },
-  //           duration: 1,
-  //           delay: .3
-  //         })
-  //         .to(".input-box,#question2,#subtitle", {
-  //           opacity: 1,
-  //           duration: .5
-  //         })
-  //         .to(".forms-light", {
-  //           opacity: .3,
-  //           duration: .5,
-  //           onComplete: () => {
-  //             nameRef.current.focus()
-  //           }
-  //         })
-  //     })
-  //   })
-
-  // }, [])
 
   //loading anim
   useEffect(() => {
@@ -498,7 +442,7 @@ const Section1 = ({ registerBtn }) => {
             <span onMouseEnter={handleInfoHover} onMouseLeave={handleInfoLeave} id='info-icon'>
               <i className="ri-info-i"></i>
             </span>
-            <p>This website does not collect personal data and does not use cookies, as the settings are saved in your own browser.</p>
+            <p>This website does not collect personal data and does not use cookies.</p>
           </div>
         </div>
         <div id='scrollformore'>
@@ -511,34 +455,8 @@ const Section1 = ({ registerBtn }) => {
           <div id='que1'>
             <p id='question1'>Are you the bride, groom, or a family member?</p>
             <p id='question2'>The registration details for the FDCI Manifest Wedding Weekend 2025 .</p>
-            <p id='count'>0<span className='step-count'>1</span> <span id='que-count'> /02</span></p>
           </div>
-          <p id='subtitle'>This step is one-time setup, but you can reset it on your dashboard.</p>
-
           <div className='card-wrapper'>
-            <div id='cards'>
-              <div className="banner-card" data-category="bride">
-                <div className='card-content'>
-                  <p>bride</p>
-                  <img src="/images/bride.png" alt="" />
-                  <h3>Explore my website with moderate animations, a customized dashboard, and more information about me.</h3>
-                </div>
-              </div>
-              <div className="banner-card" data-category="groom">
-                <div className='card-content'>
-                  <p>groom</p>
-                  <img src="/images/groom.png" alt="" />
-                  <h3>Explore my website with moderate animations, a customized dashboard, and more information about me.</h3>
-                </div>
-              </div>
-              <div className="banner-card" data-category="family">
-                <div className='card-content'>
-                  <p>family</p>
-                  <img src="/images/family.png" alt="" />
-                  <h3>Explore my website with moderate animations, a customized dashboard, and more information about me.</h3>
-                </div>
-              </div>
-            </div>
             <div className='form-container'>
               <form action="" autoComplete='off' onSubmit={handleName} className='forms form1'>
                 <div className='input-container'>
@@ -582,13 +500,13 @@ const Section1 = ({ registerBtn }) => {
                 </form>
               </div>
               <div className='input-half forms'>
-                <form action="" autoComplete='off' onSubmit={handleOccupation} className=' forms-light form4'>
+                <form action="" autoComplete='off' onSubmit={handlePin} className=' forms-light form4'>
                   <div className='input-container'>
                     <div className='input-box'>
                       <p>Please enter your Pincode</p>
                       <div className='input-wrapper'>
-                        <input type="text" name='occupation' ref={occupationRef} id='occupationfield' required disabled={disabledOccupation} onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} value={formData.occupation} placeholder='Enter your pincode' />
-                        <button className='done-btn occupation-btn btn-hover' disabled={disabledOccupation}>
+                        <input type="text" name='pin' ref={pinRef} id='pinfield' required disabled={disabledPin} onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })} value={formData.pin} placeholder='Enter your pincode' />
+                        <button className='done-btn pin-btn btn-hover' disabled={disabledPin}>
                           <p>done</p>
                         </button>
                       </div>
@@ -609,27 +527,48 @@ const Section1 = ({ registerBtn }) => {
                   </div>
                 </form>
               </div>
-              <form action="" autoComplete='off' className='forms forms-light form6'>
-                <div className='input-container'>
-                  <div className='input-box'>
-                    <p>Are you the bride, groom, a family member, or other?</p>
-                    <div className='input-wrapper'>
-                      <button className='done-btn cat-btn btn-hover option-btn' onClick={(e) => handleCategory("Bride", e)} disabled={disableCategory}>
-                        <p>Bride<i className="ri-checkbox-circle-fill checkbox"></i></p>
-                      </button>
-                      <button className='done-btn cat-btn btn-hover option-btn' onClick={(e) => handleCategory("Groom", e)} disabled={disableCategory}>
-                        <p>Groom<i className="ri-checkbox-circle-fill checkbox"></i></p>
-                      </button>
-                      <button className='done-btn cat-btn btn-hover option-btn' onClick={(e) => handleCategory("Family Member", e)} disabled={disableCategory}>
-                        <p>Family Member<i className="ri-checkbox-circle-fill checkbox"></i></p>
-                      </button>
-                      <button className='done-btn cat-btn btn-hover option-btn' onClick={(e) => handleCategory("Other", e)} disabled={disableCategory}>
-                        <p>Other<i className="ri-checkbox-circle-fill checkbox"></i></p>
-                      </button>
+              <div className='input-half forms'>
+                <form action="" autoComplete='off' className='forms-light form6'>
+                  <div className='input-container'>
+                    <div className='input-box'>
+                      <p>Are you the bride, groom, a family member, or other?</p>
+                      <div className='input-wrapper'>
+                        <button className='done-btn cat-btn btn-hover option-btn' onClick={(e) => handleCategory("Bride", e)} disabled={disableCategory}>
+                          <p>Bride<i className="ri-checkbox-circle-fill checkbox"></i></p>
+                        </button>
+                        <button className='done-btn cat-btn btn-hover option-btn' onClick={(e) => handleCategory("Groom", e)} disabled={disableCategory}>
+                          <p>Groom<i className="ri-checkbox-circle-fill checkbox"></i></p>
+                        </button>
+                        <button className='done-btn cat-btn btn-hover option-btn' onClick={(e) => handleCategory("Family Member", e)} disabled={disableCategory}>
+                          <p>Family Member<i className="ri-checkbox-circle-fill checkbox"></i></p>
+                        </button>
+                        <button className='done-btn cat-btn btn-hover option-btn' onClick={(e) => handleCategory("Other", e)} disabled={disableCategory}>
+                          <p>Other<i className="ri-checkbox-circle-fill checkbox"></i></p>
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </form>
+                </form>
+                <form action="" autoComplete='off' className='forms-light form7'>
+                  <div className='input-container'>
+                    <div className='input-box'>
+                      <p>Pick a time slot for us to reach you.</p>
+                      <div className='input-wrapper'>
+                        <button className='done-btn time-btn btn-hover option-btn' onClick={(e) => handleTime("12:00 PM – 2:00 PM", e)} disabled={disableTime}>
+                          <p>12:00 PM – 2:00 PM<i className="ri-checkbox-circle-fill checkbox"></i></p>
+                        </button>
+                        <button className='done-btn time-btn btn-hover option-btn' onClick={(e) => handleTime("2:00 PM – 3:00 PM", e)} disabled={disableTime}>
+                          <p>2:00 PM – 3:00 PM<i className="ri-checkbox-circle-fill checkbox"></i></p>
+                        </button>
+                        <button className='done-btn time-btn btn-hover option-btn' onClick={(e) => handleTime("3:00 PM – 4:00 PM", e)} disabled={disableTime}>
+                          <p>3:00 PM – 4:00 PM<i className="ri-checkbox-circle-fill checkbox"></i></p>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
             </div>
             <div className='submit-slide'>
               <i className="ri-checkbox-circle-fill"></i>

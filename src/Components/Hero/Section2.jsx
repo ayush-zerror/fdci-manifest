@@ -4,21 +4,8 @@ import ScrollTrigger from 'gsap/dist/ScrollTrigger'
 import React, { useEffect } from 'react'
 gsap.registerPlugin(ScrollToPlugin)
 gsap.registerPlugin(ScrollTrigger)
-const Section2 = ({ registerBtn }) => {
+const Section2 = () => {
 
-  const handleRegister = () => {
-    gsap.to(window, {
-      scrollTo: 0,
-      duration: 1,
-      onComplete: function () {
-        if (registerBtn.current) {
-          console.log("click");
-          registerBtn.current.click()
-        }
-      }
-    })
-
-  }
   useEffect(() => {
     gsap.to("#about-text-container p span", {
       color: "black",
@@ -55,7 +42,7 @@ const Section2 = ({ registerBtn }) => {
         </div>
       </div> */}
       <div id="about-text-container">
-        <p>{"FDCI Manifest Wedding Weekend (FMWW) is an exclusive two-day showcase celebrating India’s finest bridal designers and jewellers, offering a preview of their latest collections alongside a curated selection of top wedding brands. A collaboration between the Fashion Design Council of India (FDCI) and Manifest, RPSG Lifestyle Media Group’s luxury wedding and lifestyle title, FMWW blends high fashion with premium wedding essentials. By invitation only, this prestigious event not only elevates Indian craftsmanship and innovation but also provides unparalleled media visibility across Manifest's print, digital, and social platforms.".split("").map((l, i) => <span key={i}>{l}</span>)}</p>
+        <p>{"FDCI Manifest Wedding Weekend (FMWW) is an exclusive two-day showcase of India’s top bridal designers, jewellers, and wedding brands. A collaboration between the Fashion Design Council of India (FDCI) and Manifest, RPSG Lifestyle Media Group’s luxury wedding title, FMWW blends high fashion with premium wedding essentials, offering unmatched media visibility across Manifest's platforms.".split("").map((l, i) => <span key={i}>{l}</span>)}</p>
       </div>
       {/* <div id='banner-btn' onClick={handleRegister} className='banner-btn-bottom'>
         <h6>Register now</h6>

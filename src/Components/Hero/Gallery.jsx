@@ -10,21 +10,23 @@ const Gallery = ({ vidRef }) => {
         const currentPosition = vidRef.current.getBoundingClientRect().top
         const videoPosition = document.querySelector(".gallery-container").getBoundingClientRect().top
         const yPosition = videoPosition - currentPosition
+        const width = (window.innerWidth - 100) / 3;
+
 
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: ".gallery-container",
                 scroller: "body",
                 start: "top 100%",
-                end: "top 5%",
-                scrub: 0.5,  // Reduced scrub for smoother effect
+                end: "top 0%",
+                scrub: true,  // Reduced scrub for smoother effect
             }
         })
 
         tl.to(vidRef.current, {
-            y: yPosition + 50,
-            width: "38vw",
+            y: yPosition + 30,
             height: "50vh",
+            width: width,
             duration: 1.5,  // Slightly increased duration
             ease: "power2.out" // Smoother easing
         }, "a")
