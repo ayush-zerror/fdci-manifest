@@ -558,10 +558,10 @@ const Section1 = ({ registerBtn }) => {
                           <p>12:00 PM – 2:00 PM<i className="ri-checkbox-circle-fill checkbox"></i></p>
                         </button>
                         <button className='done-btn time-btn btn-hover option-btn' onClick={(e) => handleTime("2:00 PM – 3:00 PM", e)} disabled={disableTime}>
-                          <p>2:00 PM – 3:00 PM<i className="ri-checkbox-circle-fill checkbox"></i></p>
+                          <p>2:00 PM – 4:00 PM<i className="ri-checkbox-circle-fill checkbox"></i></p>
                         </button>
                         <button className='done-btn time-btn btn-hover option-btn' onClick={(e) => handleTime("3:00 PM – 4:00 PM", e)} disabled={disableTime}>
-                          <p>3:00 PM – 4:00 PM<i className="ri-checkbox-circle-fill checkbox"></i></p>
+                          <p>4:00 PM – 6:00 PM<i className="ri-checkbox-circle-fill checkbox"></i></p>
                         </button>
                       </div>
                     </div>

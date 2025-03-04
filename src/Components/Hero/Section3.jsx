@@ -25,11 +25,11 @@ const Section3 = ({vidRef}) => {
                 { innerText: 0 },
                 {
                     innerText: finalValue,
-                    duration: 2,
+                    duration: 1.5,
                     ease: "power2.out",
                     scrollTrigger: {
                         trigger: ".heighlight",
-                        start: "top 90%",
+                        start: "top 100%",
                         toggleActions: "play none none reset"
                     },
                     snap: { innerText: 1 }, // Ensures numbers are whole
@@ -49,29 +49,29 @@ const Section3 = ({vidRef}) => {
                     <div className='hl-count'>
                         <span>1500</span><div className='plus'>+</div>
                     </div>
-                    <p>HNI families in attendance</p>
+                    <p>Elite Wedding Guests</p>
                 </div>
                 <div>
                     <span>19</span>
-                    <p>Bridal Designers</p>
+                    <p>Luxury Bridal Designers</p>
                 </div>
                 <div>
                     <div className='hl-count'>
                         <div className='plus'>0</div><span>7</span>
                     </div>
-                    <p>⁠Bespoke Jewellers</p>
+                    <p>Exquisite Jewelry Houses</p>
                 </div>
                 <div>
                     <div className='hl-count'>
                         <div className='plus'>0</div><span>5</span>
                     </div>
-                    <p>Masterclasses by Industry experts</p>
+                    <p>Expert-Led Masterclasses</p>
                 </div>
                 <div>
                     <div className='hl-count'>
                         <div className='plus'>0</div><span>6</span>
                     </div>
-                    <p>Gifting & Wedding Planning brands</p>
+                    <p>Luxury Wedding Curators</p>
                 </div>
             </div>
             <h3>Highlights from FDCI Manifest Wedding Weekend 2024</h3>

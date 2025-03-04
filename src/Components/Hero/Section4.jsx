@@ -7,7 +7,7 @@ const Section4 = ({ registerBtn }) => {
         // registerBtn.current.scrollIntoView({ behavior: "smooth" });
         gsap.to(window, {
             scrollTo: 0,
-            duration: 1,
+            duration: 1.5,
             onComplete: function () {
                 if (registerBtn.current) {
                     registerBtn.current.click()

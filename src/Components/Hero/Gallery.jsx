@@ -17,27 +17,24 @@ const Gallery = ({ vidRef }) => {
             scrollTrigger: {
                 trigger: ".gallery-container",
                 scroller: "body",
-                start: "top 100%",
-                end: "top 0%",
-                scrub: true,  // Reduced scrub for smoother effect
-            }
-        })
-
+                start: "top 90%", // Adjusted for a smoother trigger point
+                end: "top 20%", 
+                scrub: true, // Smoothest scrub effect
+            },
+            defaults: { duration: 1.2, ease: "power2.out" } // Default settings for consistency
+        });
+        
         tl.to(vidRef.current, {
             y: yPosition + 30,
             height: "50vh",
             width: width,
-            duration: 1.5,  // Slightly increased duration
-            ease: "power2.out" // Smoother easing
-        }, "a")
-
+        }, "start") // Named position for alignment
+        
         tl.to(".row1 img", {
             scale: 1,
             opacity: 1,
-            duration: .8,
-            ease: "power2.out",
-            delay:.5
-        }, "a")
+        }, "start+=0.3"); // Slight delay for better sync
+        
 
         gsap.to(".row2 img", {
             scale: 1,
