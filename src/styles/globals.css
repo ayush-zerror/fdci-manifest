@@ -1186,6 +1186,7 @@ body {
   .heighlight p {
     width:50%;
     margin: 0;
+    font-size: 4vw !important;
     text-align: left;
 }
   .plus {
