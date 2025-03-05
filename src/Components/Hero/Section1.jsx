@@ -532,7 +532,7 @@ const Section1 = ({ registerBtn }) => {
                   <div className='input-container'>
                     <div className='input-box'>
                       <p>Are you the bride, groom, a family member, or other?</p>
-                      <div className='input-wrapper'>
+                      <div className='input-wrapper mobile-input'>
                         <button className='done-btn cat-btn btn-hover option-btn' onClick={(e) => handleCategory("Bride", e)} disabled={disableCategory}>
                           <p>Bride<i className="ri-checkbox-circle-fill checkbox"></i></p>
                         </button>
@@ -553,7 +553,7 @@ const Section1 = ({ registerBtn }) => {
                   <div className='input-container'>
                     <div className='input-box'>
                       <p>Pick a time slot for us to reach you.</p>
-                      <div className='input-wrapper'>
+                      <div className='input-wrapper mobile-input'>
                         <button className='done-btn time-btn btn-hover option-btn' onClick={(e) => handleTime("12:00 PM – 2:00 PM", e)} disabled={disableTime}>
                           <p>12:00 PM – 2:00 PM<i className="ri-checkbox-circle-fill checkbox"></i></p>
                         </button>

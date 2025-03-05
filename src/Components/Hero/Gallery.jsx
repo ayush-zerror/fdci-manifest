@@ -7,10 +7,27 @@ gsap.registerPlugin(ScrollTrigger)
 const Gallery = ({ vidRef }) => {
 
     useEffect(() => {
+        if (window.innerWidth < 575) return;
         const currentPosition = vidRef.current.getBoundingClientRect().top
         const videoPosition = document.querySelector(".gallery-container").getBoundingClientRect().top
         const yPosition = videoPosition - currentPosition
         const width = (window.innerWidth - 100) / 3;
+        var imgHeight = document.querySelector(".gallery-item img").offsetHeight
+        let height = imgHeight
+        if (window.innerWidth > 1285) {
+            height = imgHeight;
+        }
+        else if (window.innerWidth >= 1200 && window.innerWidth <= 1285) {
+            height = "40vh";
+        }
+        else if (window.innerWidth >= 991 && window.innerWidth <= 1199) {
+            height = "30vh";
+        }else if (window.innerWidth >= 768 && window.innerWidth <= 991) {
+            
+            height = "27vh";
+        } else if (window.innerWidth >= 576 && window.innerWidth <= 767) {
+            height = "20vh";
+        }
 
 
         const tl = gsap.timeline({
@@ -18,23 +35,23 @@ const Gallery = ({ vidRef }) => {
                 trigger: ".gallery-container",
                 scroller: "body",
                 start: "top 90%", // Adjusted for a smoother trigger point
-                end: "top 20%", 
+                end: "top 20%",
                 scrub: true, // Smoothest scrub effect
             },
             defaults: { duration: 1.2, ease: "power2.out" } // Default settings for consistency
         });
-        
+
         tl.to(vidRef.current, {
             y: yPosition + 30,
-            height: "50vh",
+            height: height,
             width: width,
         }, "start") // Named position for alignment
-        
+
         tl.to(".row1 img", {
             scale: 1,
             opacity: 1,
         }, "start+=0.3"); // Slight delay for better sync
-        
+
 
         gsap.to(".row2 img", {
             scale: 1,
